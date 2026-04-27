@@ -626,8 +626,8 @@
         }
         .event:last-child { border-bottom: 0; }
         .event-meta { position: sticky; top: 110px; align-self: start; }
-        .event-num { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: var(--primary); margin-bottom: 0.75rem; }
-        .event-year { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-soft); margin-bottom: 1rem; }
+        .event-num { display: block; font-family: var(--serif); font-size: 0.95rem; font-style: italic; color: var(--primary); margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+        .event-year { display: block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink-soft); margin-bottom: 1.25rem; padding-top: 0.75rem; border-top: 1px solid var(--line); }
         .event-title { font-family: var(--serif); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; color: var(--ink); line-height: 1.1; }
         .event-body p { font-size: 1.05rem; line-height: 1.75; margin-bottom: 1.25rem; max-width: 65ch; }
         .event-tag {
@@ -1148,12 +1148,12 @@
                 <div class="contact-info"><div class="info-item"><span class="info-label">Address</span><span class="info-value">House 9, Road 4/A,<br>Dhanmondi, Dhaka 1209<br>Bangladesh</span></div>
                 <div class="info-item"><span class="info-label">Phone</span><span class="info-value"><a href="tel:+8801845690704">01845690704</a></span></div>
                 <div class="info-item"><span class="info-label">Email</span><span class="info-value"><a href="mailto:amplitude.galv@gmail.com">amplitude.galv@gmail.com</a></span></div>
-                <div class="info-item"><span class="info-label">Instagram</span><span class="info-value"><a href="https://www.instagram.com/amplitude.bd" target="_blank" rel="noopener">@amplitude.bd</a></span></div>
+                <div class="info-item"><span class="info-label">Socials</span><span class="info-value"><a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener">Instagram</a> &nbsp;·&nbsp; <a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener">Facebook</a></span></div>
             </div></div></div>
         </section>
     </main>
 
-    <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Amplitude · Built by youth, for the people of Bangladesh.</div><ul class="footer-social"><li><a href="https://www.instagram.com/amplitude.bd" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:amplitude.galv@gmail.com">Email</a></li><li><a href="tel:+8801845690704">Phone</a></li></ul></div></footer>
+    <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Amplitude · Built by youth, for the people of Bangladesh.</div><ul class="footer-social"><li><a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener">Facebook</a></li><li><a href="mailto:amplitude.galv@gmail.com">Email</a></li><li><a href="tel:+8801845690704">Phone</a></li></ul></div></footer>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
