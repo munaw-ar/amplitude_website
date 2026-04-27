@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon · Amplitude</title>
+    <meta name="description" content="This page is under construction. Amplitude — youth-led social impact across Bangladesh.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8f0000;
+            --primary-dark: #6b0000;
+            --white: #ffffff;
+            --cream: #faf6f1;
+            --ink: #111111;
+            --ink-soft: #2c2c2c;
+            --line: rgba(0, 0, 0, 0.08);
+            --serif: 'Fraunces', Georgia, serif;
+            --sans: 'Inter', system-ui, sans-serif;
+            --max: 1280px;
+            --pad: clamp(1.25rem, 4vw, 3.5rem);
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--sans); font-size: 17px; line-height: 1.6; color: var(--ink); background: var(--cream); margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        * { box-sizing: border-box; }
+        a { color: inherit; text-decoration: none; }
+        h1, h2, h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; margin: 0; }
+
+        .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); width: 100%; }
+
+        /* Nav */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 0; background: rgba(143, 0, 0, 0.95); backdrop-filter: blur(20px); }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; max-width: var(--max); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+        .brand { display: flex; align-items: center; gap: 0.6rem; color: var(--white); font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
+        .brand-mark { width: 32px; height: 32px; object-fit: contain; }
+        .nav-back { color: rgba(255,255,255,0.85); font-size: 0.85rem; font-weight: 500; padding: 0.65rem 1.25rem; border: 1px solid rgba(255,255,255,0.4); border-radius: 100px; transition: all 0.3s var(--ease); }
+        .nav-back:hover { background: var(--white); color: var(--primary); border-color: var(--white); }
+
+        /* Main */
+        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 8rem 0 4rem; position: relative; overflow: hidden; }
+        main::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; max-width: 90vw; max-height: 90vw; background: radial-gradient(circle, rgba(143,0,0,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+        .panel { position: relative; max-width: 720px; text-align: center; }
+        .eyebrow { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--primary); margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.75rem; }
+        .eyebrow::before, .eyebrow::after { content: ""; width: 28px; height: 1px; background: var(--primary); }
+        .panel h1 { font-size: clamp(2.75rem, 7vw, 5rem); margin-bottom: 1.5rem; }
+        .panel h1 em { font-style: italic; font-weight: 300; color: var(--primary); }
+        .panel p.lede { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--ink-soft); line-height: 1.65; margin: 0 auto 3rem; max-width: 540px; }
+        .actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.95rem 1.85rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600; transition: all 0.3s var(--ease); }
+        .btn-primary { background: var(--primary); color: var(--white) !important; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(143,0,0,0.28); }
+        .btn-ghost { border: 1px solid rgba(0,0,0,0.18); color: var(--ink) !important; }
+        .btn-ghost:hover { border-color: var(--primary); color: var(--primary) !important; }
+
+        .marquee { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--line); }
+        .marquee-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(0,0,0,0.4); margin-bottom: 1.5rem; }
+        .marquee-list { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; list-style: none; padding: 0; margin: 0; }
+        .marquee-list li { font-size: 0.8rem; color: var(--ink-soft); padding: 0.5rem 1.1rem; background: var(--white); border: 1px solid var(--line); border-radius: 100px; }
+
+        /* Footer */
+        footer { background: var(--ink); color: rgba(255,255,255,0.6); padding: 2rem 0; font-size: 0.85rem; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-inner a { color: rgba(255,255,255,0.6); transition: color 0.3s; }
+        .footer-inner a:hover { color: var(--white); }
+        .footer-social { display: flex; gap: 1.5rem; list-style: none; padding: 0; margin: 0; }
+
+        @media (max-width: 600px) {
+            .actions { flex-direction: column; align-items: stretch; }
+            .btn { justify-content: center; }
+        }
+
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(20px); animation: fadeUp 0.9s var(--ease) forwards; }
+        .reveal:nth-child(2) { animation-delay: 0.1s; }
+        .reveal:nth-child(3) { animation-delay: 0.2s; }
+        .reveal:nth-child(4) { animation-delay: 0.3s; }
+        .reveal:nth-child(5) { animation-delay: 0.4s; }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="brand" aria-label="Amplitude home">
+                <img src="/logo_amplitude.png" alt="Amplitude logo" class="brand-mark">
+                Amplitude
+            </a>
+            <a href="/" class="nav-back">← Back to home</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="wrap">
+            <div class="panel">
+                <div class="eyebrow reveal">Coming soon</div>
+                <h1 class="reveal">This page is <em>still being built.</em></h1>
+                <p class="lede reveal">We're putting the finishing touches on this corner of Amplitude. In the meantime, the rest of our work — and how to get involved — is just one click away.</p>
+                <div class="actions reveal">
+                    <a href="/#story" class="btn btn-primary">Read our story</a>
+                    <a href="/#contact" class="btn btn-ghost">Get in touch</a>
+                </div>
+                <div class="marquee reveal">
+                    <div class="marquee-label">What's coming</div>
+                    <ul class="marquee-list">
+                        <li>Donation portal</li>
+                        <li>Booksgiving VII — 16 Dec 2026</li>
+                        <li>Benevolence VIII — 31 Dec 2026</li>
+                        <li>Stories &amp; long reads</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrap footer-inner">
+            <div>© <span id="year"></span> Amplitude · Built by youth, for the people of Bangladesh.</div>
+            <ul class="footer-social">
+                <li><a href="https://www.instagram.com/amplitude.bd" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="mailto:amplitude.galv@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
