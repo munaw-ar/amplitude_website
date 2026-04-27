@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nafira Nayeem Ahmad — Founder & President · Amplitude</title>
+    <meta name="description" content="Meet Nafira Nayeem Ahmad, founder and president of Amplitude — leading youth-driven social impact across Bangladesh since 2019.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8f0000;
+            --primary-dark: #6b0000;
+            --primary-light: #b31a1a;
+            --black: #000000;
+            --white: #ffffff;
+            --off-white: #fef9f9;
+            --cream: #faf6f1;
+            --gray-light: #f2f2f2;
+            --gray-mid: #cccccc;
+            --ink: #111111;
+            --ink-soft: #2c2c2c;
+            --line: rgba(0, 0, 0, 0.08);
+            --line-light: rgba(255, 255, 255, 0.2);
+            --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --max: 1280px;
+            --pad: clamp(1.25rem, 4vw, 3.5rem);
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { font-family: var(--sans); font-size: 17px; line-height: 1.6; color: var(--ink); background: var(--white); margin: 0; }
+        * { box-sizing: border-box; }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; margin: 0; color: var(--ink); }
+
+        .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+        /* Nav (mirrors main site) */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 0; background: rgba(143, 0, 0, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: background 0.4s var(--ease); }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 0.6rem; color: var(--white); font-family: var(--serif); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
+        .brand-mark { width: 32px; height: 32px; object-fit: contain; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; align-items: center; }
+        .nav-links a { color: rgba(255,255,255,0.85); font-size: 0.85rem; font-weight: 500; transition: color 0.25s var(--ease); }
+        .nav-links a:hover { color: var(--white); }
+        .nav-cta { padding: 0.65rem 1.25rem; border: 1px solid rgba(255,255,255,0.4); border-radius: 100px; color: var(--white) !important; transition: background 0.3s var(--ease), border-color 0.3s var(--ease); }
+        .nav-cta:hover { background: var(--white); border-color: var(--white); color: var(--primary) !important; }
+        .nav-donate { padding: 0.65rem 1.25rem; background: var(--white); border: 1px solid var(--white); border-radius: 100px; color: var(--primary) !important; font-weight: 700; transition: opacity 0.3s; }
+        .nav-donate:hover { opacity: 0.85; }
+        .menu-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 0.5rem; }
+        .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--white); transition: 0.3s var(--ease); }
+
+        /* Hero */
+        .hero { padding: 10rem 0 5rem; background: var(--cream); border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+        .hero::before { content: ""; position: absolute; top: -10%; right: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(143,0,0,0.06) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; position: relative; }
+        .portrait-frame { position: relative; aspect-ratio: 4/5; border-radius: 6px; overflow: hidden; background: var(--gray-light); box-shadow: 0 30px 80px rgba(0,0,0,0.18), 0 10px 25px rgba(143,0,0,0.08); }
+        .portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+        .hero-eyebrow { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .hero-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--primary); }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.75rem); font-weight: 400; margin-bottom: 1rem; }
+        .hero h1 .italic { font-style: italic; font-weight: 300; color: var(--primary); }
+        .hero-role { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 2rem; font-weight: 500; }
+        .hero-role .pronoun { font-size: 0.85rem; color: rgba(0,0,0,0.45); margin-left: 0.5rem; font-weight: 400; }
+        .hero-lede { font-size: 1.2rem; line-height: 1.65; color: var(--ink-soft); max-width: 540px; margin-bottom: 2.5rem; }
+        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.95rem 1.75rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600; transition: all 0.3s var(--ease); }
+        .btn-primary { background: var(--primary); color: var(--white) !important; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(143,0,0,0.28); }
+        .btn-ghost { border: 1px solid rgba(0,0,0,0.18); color: var(--ink) !important; }
+        .btn-ghost:hover { border-color: var(--primary); color: var(--primary) !important; }
+
+        /* Sections */
+        .section { padding: 6rem 0; }
+        .section.cream { background: var(--cream); }
+        .section.dark { background: var(--primary); color: var(--white); }
+        .section.dark h2, .section.dark h3 { color: var(--white); }
+        .section-eyebrow { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .section-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--primary); }
+        .section.dark .section-eyebrow { color: var(--white); }
+        .section.dark .section-eyebrow::before { background: var(--white); }
+        .section h2 { font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 400; margin-bottom: 1.25rem; max-width: 820px; }
+        .section h2 em { font-style: italic; font-weight: 300; color: var(--primary); }
+        .section.dark h2 em { color: #ffc2c2; }
+
+        /* About */
+        .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+        .about-aside { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(0,0,0,0.45); border-top: 1px solid var(--line); padding-top: 1.5rem; }
+        .about-prose p { font-size: 1.1rem; line-height: 1.75; color: var(--ink-soft); margin: 0 0 1.5rem; }
+        .about-prose p:first-child { font-size: 1.35rem; line-height: 1.55; color: var(--ink); font-weight: 400; }
+        .about-prose strong { font-weight: 600; color: var(--ink); }
+
+        /* Recognition */
+        .awards { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 3rem; }
+        .award { display: grid; grid-template-columns: 100px 1fr auto; gap: 2rem; align-items: baseline; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.18); transition: background 0.3s var(--ease); }
+        .award:last-child { border-bottom: 1px solid rgba(255,255,255,0.18); }
+        .award:hover { background: rgba(255,255,255,0.03); padding-left: 1rem; padding-right: 1rem; }
+        .award-year { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; color: #ffc2c2; }
+        .award-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; color: var(--white); margin-bottom: 0.4rem; }
+        .award-issuer { font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+        .award-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.25); padding: 0.4rem 0.85rem; border-radius: 100px; }
+
+        /* Connect */
+        .connect-card { background: var(--white); border-radius: 8px; padding: 4rem; border: 1px solid var(--line); display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: center; box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
+        .connect-card h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); margin-bottom: 1rem; }
+        .connect-card p { color: var(--ink-soft); font-size: 1.05rem; margin-bottom: 0; }
+        .linkedin-btn { display: inline-flex; align-items: center; gap: 0.75rem; background: #0a66c2; color: var(--white) !important; padding: 1.1rem 2rem; border-radius: 100px; font-weight: 600; transition: all 0.3s var(--ease); white-space: nowrap; }
+        .linkedin-btn:hover { background: #084d92; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(10,102,194,0.32); }
+        .linkedin-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+        /* Footer */
+        footer { background: var(--ink); color: rgba(255,255,255,0.6); padding: 3rem 0; font-size: 0.85rem; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+        .footer-social { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+        .footer-social a { color: rgba(255,255,255,0.6); transition: color 0.3s; }
+        .footer-social a:hover { color: var(--white); }
+
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary-dark); flex-direction: column; padding: 1.5rem; gap: 1.25rem; align-items: stretch; }
+            .nav-links.open { display: flex; }
+            .menu-toggle { display: flex; }
+            .hero { padding-top: 8rem; }
+            .hero-grid, .about-grid, .connect-card { grid-template-columns: 1fr; gap: 2.5rem; }
+            .portrait-frame { max-width: 380px; margin: 0 auto; }
+            .award { grid-template-columns: 80px 1fr; gap: 1.25rem; }
+            .award-tag { grid-column: 2; justify-self: start; margin-top: 0.5rem; }
+            .connect-card { padding: 2.5rem; text-align: center; }
+            .linkedin-btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="brand" aria-label="Amplitude home">
+                <img src="/logo_amplitude.png" alt="Amplitude logo" class="brand-mark">
+                Amplitude
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#story">Our Story</a></li>
+                <li><a href="/#team">Team</a></li>
+                <li><a href="/#method">Method</a></li>
+                <li><a href="/#stories">Stories</a></li>
+                <li><a href="/coming-soon" class="nav-donate">Donate Now</a></li>
+                <li><a href="/#contact" class="nav-cta">Get in touch</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="wrap">
+                <div class="hero-grid">
+                    <div class="portrait-frame reveal">
+                        <img src="/images/team/Nafira%20Nayeem%20Ahmad_.jpg" alt="Portrait of Nafira Nayeem Ahmad" loading="eager">
+                    </div>
+                    <div class="reveal">
+                        <div class="hero-eyebrow">Founder &amp; President</div>
+                        <h1>Nafira <span class="italic">Nayeem Ahmad</span></h1>
+                        <p class="hero-role">Founder &amp; President of Amplitude <span class="pronoun">she/her</span></p>
+                        <p class="hero-lede">Founded Amplitude in 2019 with a vision to dismantle societal taboos and discrimination across Bangladesh. What began as a small group of adolescents has grown — under her leadership — into an internationally recognised movement of 35+ youth members, 1,500+ volunteers, and over 100,000 beneficiaries.</p>
+                        <div class="hero-actions">
+                            <a href="https://www.linkedin.com/in/nafiranayeemahmad/" target="_blank" rel="noopener" class="btn btn-primary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34v-7.5H5.67v7.5h2.67zM7 9.67a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 8.67v-4.1c0-2.4-1.3-3.52-3.03-3.52-1.4 0-2.02.77-2.37 1.31v-1.13h-2.63c.04.75 0 7.5 0 7.5h2.63v-4.18c0-.24.02-.47.09-.65.18-.47.62-.96 1.34-.96.95 0 1.33.72 1.33 1.78v4.01h2.64z"/></svg>
+                                Connect on LinkedIn
+                            </a>
+                            <a href="/#story" class="btn btn-ghost">Read Amplitude's Story →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="section">
+            <div class="wrap">
+                <div class="section-eyebrow">About</div>
+                <h2 class="reveal">Building a fairer Bangladesh, <em>one chapter at a time.</em></h2>
+                <div class="about-grid" style="margin-top: 3rem;">
+                    <aside class="about-aside reveal">
+                        Founder profile<br>
+                        Est. 2019 · Dhaka, Bangladesh
+                    </aside>
+                    <div class="about-prose reveal">
+                        <p>In 2019, Nafira gathered a group of adolescents around a single conviction: that the next generation didn't have to inherit the same silences. She founded Amplitude to challenge the social taboos and structural discrimination that constrict ordinary lives in Bangladesh — and to build sustainable, community-led alternatives.</p>
+                        <p>Under her leadership, Amplitude has grown from a single art exhibition into a multi-program organization tackling menstrual hygiene stigma (<strong>Paint It Red</strong>), winter relief (<strong>Benevolence</strong>), educational equity (<strong>Booksgiving</strong>), Ramadan food security (<strong>Khair</strong>), and emergency disaster response — including the 2024 Feni and Khagrachari floods and the 2026 Korail slum fire rehabilitation.</p>
+                        <p>Her work places equity, anti-discrimination, breaking taboos, and sharing privilege at the centre of every initiative. Today, Amplitude operates across Bangladesh with international partners including the Open Society University Network, GHEA21, BracU's Social Impact Lab, and the United Nations Millennium Fellowship.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recognition -->
+        <section class="section dark">
+            <div class="wrap">
+                <div class="section-eyebrow">Recognition</div>
+                <h2 class="reveal">Awards earned, <em>under her leadership.</em></h2>
+                <p class="reveal" style="color: rgba(255,255,255,0.75); font-size: 1.1rem; max-width: 640px; margin-top: 1rem;">Amplitude's recognition reflects the work of an entire youth-led team — but every milestone below was built on the foundation Nafira laid as founder.</p>
+                <div class="awards">
+                    <div class="award reveal">
+                        <span class="award-year">2024</span>
+                        <div>
+                            <div class="award-name">The Legacy Award</div>
+                            <div class="award-issuer">Presented by HRH Prince William</div>
+                        </div>
+                        <span class="award-tag">International</span>
+                    </div>
+                    <div class="award reveal">
+                        <span class="award-year">2024</span>
+                        <div>
+                            <div class="award-name">UN Digital GameChangers Award — Top 20</div>
+                            <div class="award-issuer">United Nations</div>
+                        </div>
+                        <span class="award-tag">International</span>
+                    </div>
+                    <div class="award reveal">
+                        <span class="award-year">2023</span>
+                        <div>
+                            <div class="award-name">OSUN Get Engaged Conference</div>
+                            <div class="award-issuer">Featured presenter · Berlin</div>
+                        </div>
+                        <span class="award-tag">Conference</span>
+                    </div>
+                    <div class="award reveal">
+                        <span class="award-year">2022</span>
+                        <div>
+                            <div class="award-name">The Diana Award</div>
+                            <div class="award-issuer">Awarded for outstanding youth-led humanitarian work</div>
+                        </div>
+                        <span class="award-tag">International</span>
+                    </div>
+                    <div class="award reveal">
+                        <span class="award-year">2021</span>
+                        <div>
+                            <div class="award-name">International Children's Peace Prize</div>
+                            <div class="award-issuer">Nomination</div>
+                        </div>
+                        <span class="award-tag">Nomination</span>
+                    </div>
+                </div>
+                <p class="reveal" style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 3rem;">Additional engagements: UN Millennium Fellowship under UNAI · BARD NYC · GHEA21 workshops · Community Partner, BRAC Social Impact Lab.</p>
+            </div>
+        </section>
+
+        <!-- Connect -->
+        <section class="section cream">
+            <div class="wrap">
+                <div class="section-eyebrow">Connect</div>
+                <h2 class="reveal" style="margin-bottom: 3rem;">Continue the conversation.</h2>
+                <div class="connect-card reveal">
+                    <div>
+                        <h3>Reach out directly.</h3>
+                        <p>For partnership inquiries, speaking engagements, or to learn more about Amplitude's work, connect with Nafira on LinkedIn or contact the organization directly.</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/nafiranayeemahmad/" target="_blank" rel="noopener" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34v-7.5H5.67v7.5h2.67zM7 9.67a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 8.67v-4.1c0-2.4-1.3-3.52-3.03-3.52-1.4 0-2.02.77-2.37 1.31v-1.13h-2.63c.04.75 0 7.5 0 7.5h2.63v-4.18c0-.24.02-.47.09-.65.18-.47.62-.96 1.34-.96.95 0 1.33.72 1.33 1.78v4.01h2.64z"/></svg>
+                        View LinkedIn Profile
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap footer-inner">
+            <div>© <span id="year"></span> Amplitude · Built by youth, for the people of Bangladesh.</div>
+            <ul class="footer-social">
+                <li><a href="/">← Back to Amplitude</a></li>
+                <li><a href="https://www.instagram.com/amplitude.bd" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="mailto:amplitude.galv@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const toggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    </script>
+</body>
+</html>
