@@ -40,14 +40,14 @@
         .nav-back:hover { background: var(--white); color: var(--primary); border-color: var(--white); }
 
         /* Main */
-        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 8rem 0 4rem; position: relative; overflow: hidden; }
+        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 7rem 0; position: relative; overflow: hidden; }
         main::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; max-width: 90vw; max-height: 90vw; background: radial-gradient(circle, rgba(143,0,0,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
-        .panel { position: relative; max-width: 720px; text-align: center; }
+        .panel { position: relative; max-width: 720px; margin: 0 auto; text-align: center; }
         .eyebrow { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--primary); margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.75rem; }
         .eyebrow::before, .eyebrow::after { content: ""; width: 28px; height: 1px; background: var(--primary); }
-        .panel h1 { font-size: clamp(2.75rem, 7vw, 5rem); margin-bottom: 1.5rem; }
+        .panel h1 { font-size: clamp(2.5rem, 6.5vw, 4.5rem); margin-bottom: 1.5rem; }
         .panel h1 em { font-style: italic; font-weight: 300; color: var(--primary); }
-        .panel p.lede { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--ink-soft); line-height: 1.65; margin: 0 auto 3rem; max-width: 540px; }
+        .panel p.lede { font-size: clamp(1.05rem, 1.5vw, 1.15rem); color: var(--ink-soft); line-height: 1.65; margin: 0 auto 2.5rem; max-width: 540px; }
         .actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.95rem 1.85rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600; transition: all 0.3s var(--ease); }
         .btn-primary { background: var(--primary); color: var(--white) !important; }
@@ -55,8 +55,13 @@
         .btn-ghost { border: 1px solid rgba(0,0,0,0.18); color: var(--ink) !important; }
         .btn-ghost:hover { border-color: var(--primary); color: var(--primary) !important; }
 
-        .marquee { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--line); }
-        .marquee-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(0,0,0,0.4); margin-bottom: 1.5rem; }
+        .socials-row { display: flex; justify-content: center; gap: 0.75rem; margin-top: 2.5rem; }
+        .social-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.12); color: var(--ink-soft); transition: all 0.3s var(--ease); background: var(--white); }
+        .social-btn:hover { color: var(--primary); border-color: var(--primary); transform: translateY(-2px); }
+        .social-btn svg { width: 18px; height: 18px; }
+
+        .marquee { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--line); }
+        .marquee-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(0,0,0,0.4); margin-bottom: 1.25rem; }
         .marquee-list { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; list-style: none; padding: 0; margin: 0; }
         .marquee-list li { font-size: 0.8rem; color: var(--ink-soft); padding: 0.5rem 1.1rem; background: var(--white); border: 1px solid var(--line); border-radius: 100px; }
 
@@ -102,6 +107,14 @@
                     <a href="/#story" class="btn btn-primary">Read our story</a>
                     <a href="/#contact" class="btn btn-ghost">Get in touch</a>
                 </div>
+                <div class="socials-row reveal" aria-label="Follow Amplitude on social media">
+                    <a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                    </a>
+                </div>
                 <div class="marquee reveal">
                     <div class="marquee-label">What's coming</div>
                     <ul class="marquee-list">
@@ -119,7 +132,8 @@
         <div class="wrap footer-inner">
             <div>© <span id="year"></span> Amplitude · Built by youth, for the people of Bangladesh.</div>
             <ul class="footer-social">
-                <li><a href="https://www.instagram.com/amplitude.bd" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener">Facebook</a></li>
                 <li><a href="mailto:amplitude.galv@gmail.com">Email</a></li>
             </ul>
         </div>
