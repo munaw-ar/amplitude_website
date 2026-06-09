@@ -57,7 +57,10 @@
             line-height: 1.6;
             color: var(--ink);
             background: var(--white);
-            overflow-x: hidden;
+            /* `clip` (not `hidden`) contains horizontal overflow WITHOUT forcing
+               overflow-y to `auto` — so <body> never becomes a scroll container and
+               position: sticky keeps working. (overflow-x: hidden would break sticky.) */
+            overflow-x: clip;
         }
 
         img, svg { display: block; max-width: 100%; }
@@ -390,8 +393,8 @@
 
         /* ---------- Scroll motion (intelligentlab.ai-inspired) ---------- */
         /* Heading underline that draws itself in when the header reveals */
-        .section-head h2 { position: relative; padding-bottom: 0.65rem; }
-        .section-head h2::after {
+        .section-head h2, .values-intro h2 { position: relative; padding-bottom: 0.65rem; }
+        .section-head h2::after, .values-intro h2::after {
             content: "";
             position: absolute;
             left: 0; bottom: 0;
@@ -403,7 +406,55 @@
             transition: transform 0.9s var(--ease) 0.25s;
         }
         .dark .section-head h2::after { background: #ffc2c2; }
-        .section-head.in h2::after { transform: scaleX(1); }
+        .section-head.in h2::after, .values-intro.in h2::after { transform: scaleX(1); }
+
+        /* Sticky scroll-through: Values (Ch.02) — pinned heading, principles flow past */
+        .values-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: clamp(2.5rem, 5vw, 5rem);
+            align-items: start;
+        }
+        .values-intro { position: sticky; top: 110px; }
+        .values-intro.reveal { transform: none; } /* never transform a sticky element */
+        .values-intro .eyebrow { margin-bottom: 1.25rem; }
+        .values-intro h2 { margin-bottom: 1.4rem; }
+        .values-intro .lead {
+            font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+            line-height: 1.7;
+            color: var(--ink-soft);
+            max-width: 42ch;
+        }
+        .values-layout .values { display: flex; flex-direction: column; gap: 1.5rem; } /* stack so principles scroll past the pinned heading */
+
+        /* Methodology progress rail (Ch.05) */
+        .method-layout {
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: start;
+        }
+        .method-rail { position: sticky; top: 120px; display: flex; flex-direction: column; }
+        .rail-step {
+            display: flex; align-items: center; gap: 0.85rem;
+            padding: 0.5rem 0;
+            cursor: pointer;
+            color: var(--gray-mid);
+            font-family: var(--sans); font-size: 0.82rem; font-weight: 500; line-height: 1.25;
+            text-align: left;
+            transition: color 0.3s var(--ease);
+        }
+        .rail-step .rail-pip {
+            width: 9px; height: 9px; flex: 0 0 auto;
+            border-radius: 50%;
+            background: var(--gray-mid);
+            transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+        }
+        .rail-step .rail-idx { font-family: var(--serif); font-style: italic; opacity: 0.55; min-width: 1.7em; }
+        .rail-step:hover { color: var(--ink); }
+        .rail-step.active { color: var(--primary); }
+        .rail-step.active .rail-pip { background: var(--primary); transform: scale(1.5); }
+        .rail-step.active .rail-idx { opacity: 1; }
 
         /* Stat fill-bar (Chapter 01) */
         .stat-bar {
@@ -836,6 +887,10 @@
             .event-meta { position: static; }
             .values, .team-grid { grid-template-columns: repeat(2, 1fr); }
             .achievement-list, .partners-grid { grid-template-columns: repeat(2, 1fr); }
+            /* Collapse the sticky scroll-through layouts on tablet/mobile */
+            .values-layout, .method-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+            .values-intro { position: static; }
+            .method-rail { display: none; }
             .nav-links {
                 display: none;
                 position: fixed;
@@ -1141,16 +1196,17 @@
 
         <!-- Core Values (Equity changed) -->
         <section class="values-section">
-            <div class="wrap">
-                <div class="section-head reveal">
-                    <div class="meta"><div class="eyebrow">Chapter 02 · Core Values</div><h2>Four principles, one purpose.</h2></div>
+            <div class="wrap values-layout">
+                <div class="values-intro reveal">
+                    <div class="eyebrow">Chapter 02 · Core Values</div>
+                    <h2>Four principles, one purpose.</h2>
                     <p class="lead">Amplitude is guided by the core values of equity, anti-discrimination, breaking societal taboos, and sharing privilege — the compass behind every project we run.</p>
                 </div>
-                <div class="values reveal-stagger">
-                    <article class="value"><span class="value-num">i.</span><h3>Equity</h3><p>Establishing and sustaining equitable access to dignity, opportunity, and basic human rights — regardless of background.</p></article>
-                    <article class="value"><span class="value-num">ii.</span><h3>Anti-Discrimination</h3><p>Fighting prejudice in all its forms by amplifying the voices of those who have been silenced or sidelined.</p></article>
-                    <article class="value"><span class="value-num">iii.</span><h3>Breaking Taboos</h3><p>Holding open conversations on subjects communities have long been taught to bury — from menstrual hygiene to mental health.</p></article>
-                    <article class="value"><span class="value-num">iv.</span><h3>Sharing Privilege</h3><p>Recognising the resources we hold — and channelling them into sustainable solutions for the people who need them most.</p></article>
+                <div class="values">
+                    <article class="value reveal"><span class="value-num">i.</span><h3>Equity</h3><p>Establishing and sustaining equitable access to dignity, opportunity, and basic human rights — regardless of background.</p></article>
+                    <article class="value reveal"><span class="value-num">ii.</span><h3>Anti-Discrimination</h3><p>Fighting prejudice in all its forms by amplifying the voices of those who have been silenced or sidelined.</p></article>
+                    <article class="value reveal"><span class="value-num">iii.</span><h3>Breaking Taboos</h3><p>Holding open conversations on subjects communities have long been taught to bury — from menstrual hygiene to mental health.</p></article>
+                    <article class="value reveal"><span class="value-num">iv.</span><h3>Sharing Privilege</h3><p>Recognising the resources we hold — and channelling them into sustainable solutions for the people who need them most.</p></article>
                 </div>
             </div>
         </section>
@@ -1199,6 +1255,9 @@
         <!-- Methodology (unchanged) -->
         <section class="method-section" id="method">
             <div class="wrap"><div class="section-head reveal"><div class="meta"><div class="eyebrow">Chapter 05 · Methodology</div><h2>Ten steps from problem to lasting change.</h2></div><p class="lead">Amplitude employs a dynamic, youth-driven approach to tackle societal challenges and ensure sustainable impact. Tap any step to read how we work.</p></div>
+                <div class="method-layout">
+                <aside class="method-rail" id="methodRail" aria-hidden="true"></aside>
+                <div class="method-main">
                 <div class="methodology reveal" id="methodology">
                     <article class="step open"><div class="step-num">01</div><div class="step-content"><h3>Needs Assessment</h3><div><div class="step-body"><p>Identify pressing societal issues through research, community engagement, and collaboration with partners.</p><p>Prioritize initiatives based on urgency, community needs, and available resources.</p></div></div></div><button class="step-toggle">+</button></article>
                     <article class="step"><div class="step-num">02</div><div class="step-content"><h3>Planning &amp; Strategy Development</h3><div><div class="step-body"><p>Develop clear, actionable plans with defined objectives and timelines.</p><p>Assign responsibilities to team members and volunteers for efficient project execution.</p></div></div></div><button class="step-toggle">+</button></article>
@@ -1212,6 +1271,8 @@
                     <article class="step"><div class="step-num">10</div><div class="step-content"><h3>Reporting &amp; Recognition</h3><div><div class="step-body"><p>Document and share project outcomes with stakeholders and the public to ensure transparency.</p><p>Leverage media coverage and recognition to inspire further participation and collaboration.</p></div></div></div><button class="step-toggle">+</button></article>
                 </div>
                 <p class="reveal" style="margin-top: 3.5rem; max-width: 720px; font-style: italic; font-family: var(--serif); font-size: clamp(1.1rem, 1.5vw, 1.35rem);">This methodology — combining grassroots efforts, grants, sponsorships, and innovative outreach — ensures Amplitude's work remains impactful, inclusive, and sustainable.</p>
+                </div><!-- /.method-main -->
+                </div><!-- /.method-layout -->
             </div>
         </section>
 
@@ -1406,6 +1467,38 @@
         })();
 
         document.querySelectorAll('#methodology .step').forEach(step => { const trigger = () => { const open = step.classList.contains('open'); document.querySelectorAll('#methodology .step').forEach(s => s.classList.remove('open')); if(!open) step.classList.add('open'); }; step.addEventListener('click', trigger); step.querySelector('.step-toggle').addEventListener('click', (e) => { e.stopPropagation(); trigger(); }); });
+
+        // -------- Methodology progress rail --------
+        (function() {
+            const rail = document.getElementById('methodRail');
+            const steps = [...document.querySelectorAll('#methodology .step')];
+            if (!rail || !steps.length) return;
+            // Build the rail from the steps so it always stays in sync
+            const railItems = steps.map((step, i) => {
+                const idx = step.querySelector('.step-num').textContent.trim();
+                const title = step.querySelector('h3').textContent.trim();
+                const btn = document.createElement('button');
+                btn.className = 'rail-step';
+                btn.innerHTML = '<span class="rail-pip"></span><span class="rail-idx">' + idx + '</span><span>' + title + '</span>';
+                btn.addEventListener('click', () => {
+                    if (!step.classList.contains('open')) {
+                        steps.forEach(s => s.classList.remove('open'));
+                        step.classList.add('open');
+                    }
+                    if (window.lenis) window.lenis.scrollTo(step, { offset: -120 });
+                    else step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+                rail.appendChild(btn);
+                return btn;
+            });
+            const setActive = (i) => railItems.forEach((b, j) => b.classList.toggle('active', i === j));
+            setActive(0);
+            // Light the step crossing the viewport's mid-band
+            const stepObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) setActive(steps.indexOf(e.target)); });
+            }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+            steps.forEach(s => stepObs.observe(s));
+        })();
 
         // -------- Gallery --------
         (function() {
