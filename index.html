@@ -498,7 +498,7 @@
             justify-content: center;
             transition: transform 0.6s var(--ease);
         }
-        .team-card:hover .team-portrait { transform: scale(0.98); }
+        .team-card--linked:hover .team-portrait { transform: scale(0.97); }
         .team-portrait::before {
             content: "";
             position: absolute;
@@ -525,6 +525,36 @@
         }
         .team-role { font-size: 0.8rem; color: var(--ink-soft); font-weight: 500; }
         .team-pronoun { font-size: 0.7rem; color: var(--primary); font-style: italic; margin-left: 0.4rem; }
+        /* Founder card — clickable affordance */
+        .team-card--linked { cursor: pointer; }
+        .team-card--linked .team-portrait-link:focus-visible { outline: 2px solid #d49a3f; outline-offset: 4px; border-radius: 4px; }
+        .team-badge {
+            position: absolute;
+            z-index: 3;
+            left: 0.7rem;
+            bottom: 0.7rem;
+            padding: 0.4rem 0.6rem 0.45rem;
+            background: linear-gradient(135deg, #f0c878 0%, #d49a3f 100%);
+            color: #3a1800;
+            border-radius: 3px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+        }
+        .team-badge .tb-top { display: block; font-family: var(--serif); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.02em; line-height: 1; }
+        .team-badge .tb-bot { display: block; margin-top: 2px; font-size: 0.54rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.82; }
+        .team-story-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.6rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #9a6a12;
+        }
+        .team-story-link .arr { transition: transform 0.3s var(--ease); }
+        .team-card--linked:hover .team-name { text-decoration: underline; text-decoration-color: #d49a3f; text-underline-offset: 4px; }
+        .team-card--linked:hover .team-story-link .arr { transform: translateX(4px); }
 
         /* Achievements */
         .achievement-list {
@@ -1039,7 +1069,7 @@
                     <p class="lead">Six leaders, one mission. Amplitude is built and run by young Bangladeshis who chose to act on the world they wanted to see.</p>
                 </div>
                 <div class="team-grid reveal-stagger">
-                    <article class="team-card"><a href="/founder" class="team-portrait-link" aria-label="Learn more about Nafira Nayeem Ahmad"><div class="team-portrait"><img src="/images/team/Nafira%20Nayeem%20Ahmad_.jpg" alt="Nafira Nayeem Ahmad" loading="lazy"><span class="team-initial">N</span></div></a><h3 class="team-name">Nafira Nayeem Ahmad</h3><p class="team-role">Founder &amp; President <span class="team-pronoun">she/her</span></p></article>
+                    <article class="team-card team-card--linked"><a href="/founder" class="team-portrait-link" aria-label="Read Nafira Nayeem Ahmad's profile and founder's story"><div class="team-portrait"><img src="/images/team/Nafira%20Nayeem%20Ahmad_.jpg" alt="Nafira Nayeem Ahmad" loading="lazy"><span class="team-initial">N</span><span class="team-badge"><span class="tb-top">Forbes 30 U 30</span><span class="tb-bot">Asia · 2026</span></span></div><h3 class="team-name">Nafira Nayeem Ahmad</h3><p class="team-role">Founder &amp; President <span class="team-pronoun">she/her</span></p><span class="team-story-link">Read her story <span class="arr">→</span></span></a></article>
                     <article class="team-card"><div class="team-portrait"><img src="/images/team/Shadman%20Sayeed.jpeg" alt="K M Shadman Sayeed" loading="lazy"><span class="team-initial">K</span></div><h3 class="team-name">K M Shadman Sayeed</h3><p class="team-role">Vice President <span class="team-pronoun">he/him</span></p></article>
                     <article class="team-card"><div class="team-portrait"><img src="/images/team/Aarzana%20Binte%20Alauddin.jpg" alt="Aarzana Binte Alauddin" loading="lazy"><span class="team-initial">A</span></div><h3 class="team-name">Aarzana Binte Alauddin</h3><p class="team-role">Strategist <span class="team-pronoun">she/they</span></p></article>
                     <article class="team-card"><div class="team-portrait"><img src="/images/team/Nysa%20Nayeem%20Ahmad.jpg" alt="Nysa Nayeem Ahmad" loading="lazy"><span class="team-initial">N</span></div><h3 class="team-name">Nysa Nayeem Ahmad</h3><p class="team-role">Head of PR &amp; Outreach <span class="team-pronoun">she/her</span></p></article>
