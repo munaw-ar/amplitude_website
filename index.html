@@ -532,6 +532,25 @@
             transition: background 0.4s;
         }
         .ach:hover { background: var(--primary-dark); }
+        .ach.featured {
+            grid-column: 1 / -1;
+            background: linear-gradient(115deg, var(--primary-dark) 0%, var(--primary) 55%, var(--primary-light) 135%);
+            border: 1px solid rgba(232, 185, 106, 0.5);
+            box-shadow: inset 0 0 60px rgba(232, 185, 106, 0.08);
+            flex-direction: row;
+            align-items: center;
+            gap: clamp(1.5rem, 4vw, 3.5rem);
+            flex-wrap: wrap;
+        }
+        .ach.featured:hover { background: linear-gradient(115deg, var(--primary-dark) 0%, var(--primary) 55%, var(--primary-light) 135%); }
+        .ach.featured .ach-featured-main { flex: 1 1 360px; }
+        .ach.featured .ach-icon { border-color: #e8b96a; color: #e8b96a; width: 40px; height: 40px; font-size: 1.15rem; }
+        .ach.featured .ach-year { color: #e8b96a; font-style: normal; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; }
+        .ach.featured .ach-title { font-size: clamp(1.5rem, 3vw, 2.15rem); margin-bottom: 0; }
+        .ach.featured .ach-featured-body { flex: 1 1 380px; }
+        .ach.featured .ach-detail { font-size: 0.95rem; color: rgba(255, 255, 255, 0.85); margin-bottom: 1.25rem; }
+        .ach-link { display: inline-block; color: #e8b96a; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid rgba(232, 185, 106, 0.4); padding-bottom: 3px; transition: border-color 0.3s, gap 0.3s; }
+        .ach-link:hover { border-color: #e8b96a; }
         .ach-year { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: #ffc2c2; margin-bottom: 1rem; }
         .ach-title { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--white); line-height: 1.3; margin-bottom: 1rem; }
         .ach-detail { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.55; }
@@ -1022,6 +1041,10 @@
             <div class="wrap">
                 <div class="section-head reveal"><div class="meta"><div class="eyebrow">Chapter 04 · Recognition</div><h2>Honoured at home and abroad.</h2></div><p class="lead">From the streets of Dhaka to the halls of HRH Prince William and the United Nations — recognition for work the youth of Bangladesh refused to wait for.</p></div>
                 <div class="achievement-list reveal-stagger">
+                    <div class="ach featured">
+                        <div class="ach-featured-main"><div class="ach-icon">★</div><div class="ach-year">Forbes · 2026 · Asia</div><div class="ach-title">Forbes 30 Under 30 — Social Impact</div></div>
+                        <div class="ach-featured-body"><p class="ach-detail">Founder Nafira Nayeem Ahmad, 22, has been named to the Forbes 30 Under 30 Asia 2026 list in the Social Impact category — honouring the journey from a teenage vision in 2019 to a movement that has touched the lives of over 98,000 people across Bangladesh.</p><a class="ach-link" href="https://www.forbes.com/30-under-30/2026/asia/social-impact?profile=nafira-nayeem-ahmad" target="_blank" rel="noopener">View the Forbes profile →</a></div>
+                    </div>
                     <div class="ach"><div><div class="ach-icon">★</div><div class="ach-year">April 2026</div><div class="ach-title">100,000+ Beneficiaries</div></div><p class="ach-detail">Reached over 100,000 individuals and taken full responsibility of 2+ underprivileged schools.</p></div>
                     <div class="ach"><div><div class="ach-icon">i</div><div class="ach-year">2021</div><div class="ach-title">International Children's Peace Prize</div></div><p class="ach-detail">Received a nomination for the International Children's Peace Prize.</p></div>
                     <div class="ach"><div><div class="ach-icon">★</div><div class="ach-year">2022</div><div class="ach-title">The Diana Award</div></div><p class="ach-detail">Awarded the Diana Award — the most prestigious accolade a young person can receive for social action.</p></div>
