@@ -117,6 +117,14 @@
         .award--featured .award-name .aw-arr { font-size: 0.95rem; color: #f3cd82; transition: transform 0.3s var(--ease); }
         .award--featured:hover .award-name .aw-arr { transform: translateX(4px); }
         .award--featured .award-tag { color: #3a1800; background: linear-gradient(135deg, #f3cd82, #d49a3f); border-color: transparent; font-weight: 700; }
+        /* Linked (sourced) award rows */
+        .award--link .award-name { display: inline-flex; align-items: center; gap: 0.5rem; }
+        .award--link .aw-arr { font-size: 0.9rem; color: #ffc2c2; opacity: 0.6; transition: transform 0.3s var(--ease), opacity 0.3s var(--ease); }
+        .award--link:hover .aw-arr { opacity: 1; transform: translate(2px, -2px); }
+        a.tlink { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: rgba(143,0,0,0.35); transition: text-decoration-color 0.25s; }
+        a.tlink:hover { text-decoration-color: var(--primary); }
+        .section.dark a.tlink { color: #ffc2c2; text-decoration-color: rgba(255,194,194,0.4); }
+        .section.dark a.tlink:hover { text-decoration-color: #ffc2c2; }
 
         /* Connect */
         .connect-card { background: var(--white); border-radius: 8px; padding: 4rem; border: 1px solid var(--line); display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: center; box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
@@ -212,7 +220,7 @@
                     <div class="about-prose reveal">
                         <p>In 2019, Nafira gathered a group of adolescents around a single conviction: that the next generation didn't have to inherit the same silences. She founded Amplitude to challenge the social taboos and structural discrimination that constrict ordinary lives in Bangladesh — and to build sustainable, community-led alternatives.</p>
                         <p>Under her leadership, Amplitude has grown from a single art exhibition into a multi-program organization tackling menstrual hygiene stigma (<strong>Paint It Red</strong>), winter relief (<strong>Benevolence</strong>), educational equity (<strong>Booksgiving</strong>), Ramadan food security (<strong>Khair</strong>), and emergency disaster response — including the 2024 Feni and Khagrachari floods and the 2026 Korail slum fire rehabilitation.</p>
-                        <p>Her work places equity, anti-discrimination, breaking taboos, and sharing privilege at the centre of every initiative. Today, Amplitude operates across Bangladesh with international partners including the Open Society University Network, GHEA21, BracU's Social Impact Lab, and the United Nations Millennium Fellowship.</p>
+                        <p>Her work places equity, anti-discrimination, breaking taboos, and sharing privilege at the centre of every initiative. Today, Amplitude operates across Bangladesh with international partners including the Open Society University Network, GHEA21, BracU's Social Impact Lab, and the <a class="tlink" href="https://www.millenniumfellows.org/fellow/2024/brac/nafira-nayeem-ahmad" target="_blank" rel="noopener">United Nations Millennium Fellowship</a>.</p>
                     </div>
                 </div>
             </div>
@@ -257,24 +265,24 @@
                         </div>
                         <span class="award-tag">Conference</span>
                     </div>
-                    <div class="award reveal">
+                    <a class="award award--link reveal" href="https://diana-award.org.uk/stories/nafira-nayeem-ahmad" target="_blank" rel="noopener">
                         <span class="award-year">2022</span>
                         <div>
-                            <div class="award-name">The Diana Award</div>
+                            <div class="award-name">The Diana Award <span class="aw-arr">↗</span></div>
                             <div class="award-issuer">Awarded for outstanding youth-led humanitarian work</div>
                         </div>
                         <span class="award-tag">International</span>
-                    </div>
-                    <div class="award reveal">
+                    </a>
+                    <a class="award award--link reveal" href="https://www.kidsrights.org/persons/nafira/" target="_blank" rel="noopener">
                         <span class="award-year">2021</span>
                         <div>
-                            <div class="award-name">International Children's Peace Prize</div>
+                            <div class="award-name">International Children's Peace Prize <span class="aw-arr">↗</span></div>
                             <div class="award-issuer">Nomination</div>
                         </div>
                         <span class="award-tag">Nomination</span>
-                    </div>
+                    </a>
                 </div>
-                <p class="reveal" style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 3rem;">Additional engagements: UN Millennium Fellowship under UNAI · BARD NYC · GHEA21 workshops · Community Partner, BRAC Social Impact Lab.</p>
+                <p class="reveal" style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 3rem;">Additional engagements: <a class="tlink" href="https://www.millenniumfellows.org/fellow/2024/brac/nafira-nayeem-ahmad" target="_blank" rel="noopener">UN Millennium Fellowship</a> under UNAI · BARD NYC · GHEA21 workshops · Community Partner, BRAC Social Impact Lab.</p>
             </div>
         </section>
 

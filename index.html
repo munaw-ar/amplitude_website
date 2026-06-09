@@ -45,6 +45,12 @@
             overflow-x: clip; /* belt-and-suspenders against horizontal scroll; preserves position: sticky */
         }
 
+        /* Lenis smooth-scroll plumbing (only active once the lenis classes attach) */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: clip; }
+
         body {
             font-family: var(--sans);
             font-size: 17px;
@@ -261,6 +267,9 @@
             0% { transform: translate(0, 0) scale(1); }
             100% { transform: translate(40px, -30px) scale(1.15); }
         }
+        /* Pause the expensive blurred-blob animation once the hero scrolls away */
+        .hero-offscreen .hero-bg::before,
+        .hero-offscreen .hero-bg::after { animation-play-state: paused; }
         .hero-grid {
             position: absolute;
             inset: 0;
@@ -427,6 +436,7 @@
             width: max-content;
             white-space: nowrap;
             animation: beltScroll 40s linear infinite;
+            will-change: transform; /* promote to its own layer for jank-free scrolling */
         }
         .impact-belt:hover .impact-track { animation-play-state: paused; }
         .impact-item {
@@ -649,6 +659,10 @@
             transition: background 0.4s;
         }
         .ach:hover { background: var(--primary-dark); }
+        a.ach--link { cursor: pointer; }
+        .ach-out { color: #f3cd82; font-size: 0.85em; opacity: 0.65; display: inline-block; transition: opacity 0.3s var(--ease), transform 0.3s var(--ease); }
+        a.ach--link:hover .ach-out { opacity: 1; transform: translate(2px, -2px); }
+        a.ach--link:hover .ach-title { text-decoration: underline; text-decoration-color: rgba(243,205,130,0.6); text-underline-offset: 3px; }
         .ach.featured {
             grid-column: 1 / -1;
             background: linear-gradient(115deg, var(--primary-dark) 0%, var(--primary) 55%, var(--primary-light) 135%);
@@ -1169,12 +1183,12 @@
                         <div class="ach-featured-body"><p class="ach-detail">Founder Nafira Nayeem Ahmad, 22, has been named to the Forbes 30 Under 30 Asia 2026 list in the Social Impact category — honouring the journey from a teenage vision in 2019 to a movement that has touched the lives of over 98,000 people across Bangladesh.</p><a class="ach-link" href="https://www.forbes.com/30-under-30/2026/asia/social-impact?profile=nafira-nayeem-ahmad" target="_blank" rel="noopener">View the Forbes profile →</a></div>
                     </div>
                     <div class="ach"><div><div class="ach-icon">★</div><div class="ach-year">April 2026</div><div class="ach-title">100,000+ Beneficiaries</div></div><p class="ach-detail">Reached over 100,000 individuals and taken full responsibility of 2+ underprivileged schools.</p></div>
-                    <div class="ach"><div><div class="ach-icon">i</div><div class="ach-year">2021</div><div class="ach-title">International Children's Peace Prize</div></div><p class="ach-detail">Received a nomination for the International Children's Peace Prize.</p></div>
-                    <div class="ach"><div><div class="ach-icon">★</div><div class="ach-year">2022</div><div class="ach-title">The Diana Award</div></div><p class="ach-detail">Awarded the Diana Award — the most prestigious accolade a young person can receive for social action.</p></div>
+                    <a class="ach ach--link" href="https://www.kidsrights.org/persons/nafira/" target="_blank" rel="noopener"><div><div class="ach-icon">i</div><div class="ach-year">2021</div><div class="ach-title">International Children's Peace Prize <span class="ach-out">↗</span></div></div><p class="ach-detail">Received a nomination for the International Children's Peace Prize.</p></a>
+                    <a class="ach ach--link" href="https://diana-award.org.uk/stories/nafira-nayeem-ahmad" target="_blank" rel="noopener"><div><div class="ach-icon">★</div><div class="ach-year">2022</div><div class="ach-title">The Diana Award <span class="ach-out">↗</span></div></div><p class="ach-detail">Awarded the Diana Award — the most prestigious accolade a young person can receive for social action.</p></a>
                     <div class="ach"><div><div class="ach-icon">★</div><div class="ach-year">2024</div><div class="ach-title">The Legacy Award</div></div><p class="ach-detail">Awarded the Legacy Award by HRH Prince William.</p></div>
                     <div class="ach"><div><div class="ach-icon">i</div><div class="ach-year">2023 · Berlin</div><div class="ach-title">OSUN Get Engaged</div></div><p class="ach-detail">Presented at the OSUN Get Engaged Conference 2023 in Berlin.</p></div>
                     <div class="ach"><div><div class="ach-icon">★</div><div class="ach-year">2024</div><div class="ach-title">UN Digital GameChangers</div></div><p class="ach-detail">Top 20 in the United Nations Digital GameChangers Award 2024.</p></div>
-                    <div class="ach"><div><div class="ach-icon">i</div><div class="ach-year">UNAI</div><div class="ach-title">UN Millennium Fellowship</div></div><p class="ach-detail">Presented in the UN Millennium Fellowship under UNAI.</p></div>
+                    <a class="ach ach--link" href="https://www.millenniumfellows.org/fellow/2024/brac/nafira-nayeem-ahmad" target="_blank" rel="noopener"><div><div class="ach-icon">i</div><div class="ach-year">UNAI</div><div class="ach-title">UN Millennium Fellowship <span class="ach-out">↗</span></div></div><p class="ach-detail">Presented in the UN Millennium Fellowship under UNAI.</p></a>
                     <div class="ach"><div><div class="ach-icon">i</div><div class="ach-year">Ongoing</div><div class="ach-title">BARD NYC &amp; GHEA21</div></div><p class="ach-detail">Presented in several BARD NYC and GHEA21 workshops and conferences.</p></div>
                     <div class="ach"><div><div class="ach-icon">★</div><div class="ach-year">Partner</div><div class="ach-title">BRAC Social Impact Lab</div></div><p class="ach-detail">Community Partner with the BRAC Social Impact Lab.</p></div>
                     <div class="ach" style="grid-column: 1 / -1;"><div><div class="ach-icon">P</div><div class="ach-year">Press &amp; Media</div><div class="ach-title">Featured worldwide</div></div><p class="ach-detail">Amplitude has gained significant recognition, including appearances on international news media like The Daily Mail and The London Times, national news channels like Jamuna Television, and features in prominent newspapers like Prothom Alo, Ittefaq, Jugantor, The Front Page, and Cablgram.</p></div>
@@ -1205,7 +1219,7 @@
         <section class="partners-section dark">
             <div class="wrap"><div class="section-head reveal"><div class="meta"><div class="eyebrow">Chapter 06 · Partnerships</div><h2>Together with the changemakers.</h2></div><p class="lead">Amplitude collaborates with several organizations and entities to further its mission — including, but not limited to, the partners below.</p></div>
                 <div class="partners-grid reveal-stagger">
-                    <div class="partner">Open Society University Network</div><div class="partner">GHEA21</div><div class="partner">The Diana Award</div><div class="partner">Social Impact Lab, BracU</div><div class="partner">Hope Bangladesh</div>
+                    <div class="partner">Open Society University Network</div><div class="partner">GHEA21</div><a class="partner" href="https://diana-award.org.uk/stories/nafira-nayeem-ahmad" target="_blank" rel="noopener">The Diana Award</a><div class="partner">Social Impact Lab, BracU</div><div class="partner">Hope Bangladesh</div>
                     <div class="partner">Radio Carnival</div><div class="partner">Chaya</div><div class="partner">Transport</div><div class="partner">Project Debi</div><div class="partner">Kuasha</div>
                     <div class="partner">Vibgyor</div><div class="partner">Bidyanondo</div><div class="partner">Project Purple</div><div class="partner">UCB Pathways at Monash</div><div class="partner">UNRWA</div>
                 </div>
@@ -1301,8 +1315,35 @@
 
     <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Amplitude · Built by youth, for the people of Bangladesh.</div><ul class="footer-social"><li><a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener">Facebook</a></li><li><a href="mailto:amplitude.galv@gmail.com">Email</a></li><li><a href="tel:+8801845690704">Phone</a></li></ul></div></footer>
 
+    <!-- Lenis: buttery inertia scrolling (smooths the mouse wheel; touch stays native) -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ---- Buttery smooth scroll ----
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion || !window.Lenis) return; // respect reduced-motion; degrade to native scroll if CDN fails
+            const lenis = new Lenis({
+                duration: 1.1,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // exponential ease-out → momentum glide
+                smoothWheel: true,
+            });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+            // Route in-page anchor links through Lenis so jumps glide too
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    const id = a.getAttribute('href');
+                    if (id.length > 1) {
+                        const target = document.querySelector(id);
+                        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -64 }); }
+                    }
+                });
+            });
+            window.lenis = lenis;
+        })();
+
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
         const toggle = document.getElementById('menuToggle');
@@ -1466,14 +1507,17 @@
                 ctx.stroke();
             }
 
-            let t = 0, raf = null;
+            let t = 0, raf = null, running = false;
             function frame() {
+                if (!running) return;
                 ctx.clearRect(0, 0, w, h);
                 t += 1;
                 mouse.active *= 0.96; // ease cursor influence back out
                 layers.forEach(l => drawWave(l, t * l.speed));
                 raf = requestAnimationFrame(frame);
             }
+            function start() { if (!running && !reduce) { running = true; raf = requestAnimationFrame(frame); } }
+            function stop() { running = false; if (raf) cancelAnimationFrame(raf); raf = null; }
 
             resize();
             window.addEventListener('resize', resize, { passive: true });
@@ -1502,7 +1546,15 @@
                 canvas.style.animation = 'none';
                 canvas.style.opacity = '1';
             } else {
-                frame();
+                // Only animate the waveform (and the blurred blobs) while the hero is on
+                // screen — stops constant repaints that would otherwise fight the scroll.
+                const vis = new IntersectionObserver((es) => {
+                    es.forEach(e => {
+                        hero.classList.toggle('hero-offscreen', !e.isIntersecting);
+                        e.isIntersecting ? start() : stop();
+                    });
+                }, { threshold: 0 });
+                vis.observe(hero);
             }
         })();
     </script>
