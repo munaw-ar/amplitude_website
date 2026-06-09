@@ -1315,15 +1315,17 @@
 
     <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Amplitude · Built by youth, for the people of Bangladesh.</div><ul class="footer-social"><li><a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener">Facebook</a></li><li><a href="mailto:amplitude.galv@gmail.com">Email</a></li><li><a href="tel:+8801845690704">Phone</a></li></ul></div></footer>
 
-    <!-- Lenis: buttery inertia scrolling (smooths the mouse wheel; touch stays native) -->
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <!-- Lenis: buttery inertia scrolling (smooths the mouse wheel; touch stays native). async so it never blocks render. -->
+    <script async src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" onload="window.initLenis && window.initLenis()"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
         // ---- Buttery smooth scroll ----
-        (function() {
+        // Global so the (async) Lenis script's onload can trigger it; also called
+        // immediately below in case Lenis resolved before this script ran.
+        window.initLenis = function() {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduceMotion || !window.Lenis) return; // respect reduced-motion; degrade to native scroll if CDN fails
+            if (reduceMotion || !window.Lenis || window.lenis) return; // respect reduced-motion; no-op if already init / CDN missing
             const lenis = new Lenis({
                 duration: 1.1,
                 easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // exponential ease-out → momentum glide
@@ -1342,7 +1344,8 @@
                 });
             });
             window.lenis = lenis;
-        })();
+        };
+        if (window.Lenis) window.initLenis(); // in case the async script resolved before this ran
 
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
