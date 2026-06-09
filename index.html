@@ -42,6 +42,7 @@
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: clip; /* belt-and-suspenders against horizontal scroll; preserves position: sticky */
         }
 
         body {
@@ -224,7 +225,7 @@
             position: relative;
             overflow: hidden;
             padding-top: 8rem;
-            padding-bottom: 5rem;
+            padding-bottom: clamp(5.5rem, 9vh, 7.5rem); /* leave room for the marquee belt pinned at the hero's base */
         }
         .hero-bg {
             position: absolute;
@@ -407,18 +408,22 @@
         }
         .stat.filled .stat-bar { transform: scaleX(1); }
 
-        /* Impact-areas marquee belt */
+        /* Impact-areas marquee belt — pinned inside the hero's base, clipped by the hero */
         .impact-belt {
-            background: var(--primary);
-            border-top: 1px solid rgba(255,255,255,0.18);
-            border-bottom: 1px solid rgba(255,255,255,0.18);
-            padding: 1.5rem 0;
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.14);
+            border-top: 1px solid rgba(255,255,255,0.16);
+            padding: clamp(0.85rem, 2vh, 1.25rem) 0;
             overflow: hidden;
-            max-width: 100vw;
+            max-width: 100%;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
         }
         .impact-track {
             display: flex;
-            gap: 3.5rem;
+            gap: clamp(2rem, 4vw, 3.5rem);
             width: max-content;
             white-space: nowrap;
             animation: beltScroll 40s linear infinite;
@@ -427,11 +432,11 @@
         .impact-item {
             font-family: var(--serif);
             font-style: italic;
-            font-size: clamp(1.05rem, 1.9vw, 1.55rem);
+            font-size: clamp(0.95rem, 1.6vw, 1.4rem);
             color: rgba(255,255,255,0.82);
             display: inline-flex;
             align-items: center;
-            gap: 3.5rem;
+            gap: clamp(2rem, 4vw, 3.5rem);
         }
         .impact-item::after {
             content: "✦";
@@ -785,7 +790,7 @@
         .contact-lead { font-size: clamp(1.1rem, 1.5vw, 1.35rem); line-height: 1.55; color: rgba(255,255,255,0.85); max-width: 50ch; margin-bottom: 3rem; font-family: var(--serif); font-style: italic; }
         .contact-info { display: grid; gap: 2rem; }
         .info-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: #ffc2c2; }
-        .info-value { font-family: var(--serif); font-size: clamp(1.1rem, 1.5vw, 1.4rem); color: var(--white); line-height: 1.4; }
+        .info-value { font-family: var(--serif); font-size: clamp(1.1rem, 1.5vw, 1.4rem); color: var(--white); line-height: 1.4; overflow-wrap: anywhere; word-break: break-word; }
         .info-value a { border-bottom: 1px solid rgba(255,255,255,0.4); transition: color 0.3s, border-color 0.3s; }
         .info-value a:hover { color: #ffc2c2; border-color: #ffc2c2; }
 
@@ -804,7 +809,7 @@
             gap: 1.5rem;
             font-size: 0.85rem;
         }
-        .footer-social { display: flex; gap: 1.25rem; list-style: none; }
+        .footer-social { display: flex; flex-wrap: wrap; gap: 1.25rem; list-style: none; }
         .footer-social a:hover { color: var(--white); }
 
         /* Responsive */
@@ -1077,13 +1082,11 @@
                     <span class="hero-since">— Founded in Dhaka, 2019</span>
                 </div>
             </div>
-            <div class="hero-scroll" aria-hidden="true">Scroll to begin</div>
+            <!-- Impact-areas marquee belt, pinned to the hero's base -->
+            <div class="impact-belt" aria-hidden="true">
+                <div class="impact-track" id="impactTrack"></div>
+            </div>
         </section>
-
-        <!-- Impact-areas marquee belt -->
-        <div class="impact-belt" aria-hidden="true">
-            <div class="impact-track" id="impactTrack"></div>
-        </div>
 
         <!-- Intro -->
         <section class="intro" id="story">
