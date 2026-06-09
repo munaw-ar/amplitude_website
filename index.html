@@ -447,6 +447,10 @@
             line-height: 1;
             display: block;
             margin-bottom: 0.65rem;
+            /* tabular figures keep every digit the same width so the number
+               doesn't jitter/reflow while counting up */
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum" 1;
         }
         .stat-label {
             font-size: 0.78rem;
@@ -1247,7 +1251,7 @@
                             const suffix = el.dataset.suffix || '';
                             const duration = 2000;
                             const start = performance.now();
-                            const format = n => target >= 1000 ? Math.floor(n).toLocaleString() : Math.floor(n);
+                            const format = n => target >= 1000 ? Math.round(n).toLocaleString() : Math.round(n);
                             const step = (now) => {
                                 let t = Math.min((now - start) / duration, 1);
                                 t = 1 - Math.pow(1 - t, 3); // ease-out cubic
