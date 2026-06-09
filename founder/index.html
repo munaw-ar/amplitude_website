@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nafira Nayeem Ahmad — Founder & President · Amplitude</title>
-    <meta name="description" content="Meet Nafira Nayeem Ahmad, founder and president of Amplitude — leading youth-driven social impact across Bangladesh since 2019.">
+    <title>Nafira Nayeem Ahmad — Founder of Amplitude · Forbes 30 Under 30 Asia 2026</title>
+    <meta name="description" content="Meet Nafira Nayeem Ahmad, founder and president of Amplitude and a Forbes 30 Under 30 Asia 2026 honouree for Social Impact — leading youth-driven social change across Bangladesh since 2019.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -102,6 +102,21 @@
         .award-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; color: var(--white); margin-bottom: 0.4rem; }
         .award-issuer { font-size: 0.85rem; color: rgba(255,255,255,0.65); }
         .award-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.25); padding: 0.4rem 0.85rem; border-radius: 100px; }
+        /* Forbes honour — hero badge */
+        .hero-honor { display: inline-flex; align-items: center; gap: 0.6rem; margin-bottom: 1.75rem; padding: 0.5rem 1.1rem 0.5rem 0.55rem; background: linear-gradient(135deg, #f3cd82 0%, #d49a3f 100%); color: #3a1800; border-radius: 100px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.01em; box-shadow: 0 10px 26px rgba(212,154,63,0.32); transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+        .hero-honor:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(212,154,63,0.45); }
+        .hero-honor .hh-star { display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; background: #3a1800; color: #f3cd82; border-radius: 50%; font-size: 0.75rem; flex-shrink: 0; }
+        .hero-honor .hh-sub { font-weight: 600; opacity: 0.72; }
+        .hero-honor .hh-arr { transition: transform 0.3s var(--ease); }
+        .hero-honor:hover .hh-arr { transform: translateX(3px); }
+        /* Forbes honour — featured award row */
+        .award--featured { border-top: 1px solid rgba(243,205,130,0.55); background: linear-gradient(110deg, rgba(243,205,130,0.14), rgba(243,205,130,0.02)); }
+        .award--featured:hover { background: linear-gradient(110deg, rgba(243,205,130,0.2), rgba(243,205,130,0.04)); padding-left: 1rem; padding-right: 1rem; }
+        .award--featured .award-year { color: #f3cd82; }
+        .award--featured .award-name { display: inline-flex; align-items: center; gap: 0.5rem; }
+        .award--featured .award-name .aw-arr { font-size: 0.95rem; color: #f3cd82; transition: transform 0.3s var(--ease); }
+        .award--featured:hover .award-name .aw-arr { transform: translateX(4px); }
+        .award--featured .award-tag { color: #3a1800; background: linear-gradient(135deg, #f3cd82, #d49a3f); border-color: transparent; font-weight: 700; }
 
         /* Connect */
         .connect-card { background: var(--white); border-radius: 8px; padding: 4rem; border: 1px solid var(--line); display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: center; box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
@@ -170,7 +185,8 @@
                         <div class="hero-eyebrow">Founder &amp; President</div>
                         <h1>Nafira <span class="italic">Nayeem Ahmad</span></h1>
                         <p class="hero-role">Founder &amp; President of Amplitude <span class="pronoun">she/her</span></p>
-                        <p class="hero-lede">Founded Amplitude in 2019 with a vision to dismantle societal taboos and discrimination across Bangladesh. What began as a small group of adolescents has grown — under her leadership — into an internationally recognised movement of 35+ youth members, 1,500+ volunteers, and over 100,000 beneficiaries.</p>
+                        <a href="https://www.forbes.com/30-under-30/2026/asia/social-impact?profile=nafira-nayeem-ahmad" target="_blank" rel="noopener" class="hero-honor"><span class="hh-star">★</span> Forbes 30 Under 30 — Asia 2026 <span class="hh-sub">· Social Impact</span> <span class="hh-arr">→</span></a>
+                        <p class="hero-lede">Named to the <strong>Forbes 30 Under 30 Asia 2026</strong> list for Social Impact, Nafira founded Amplitude in 2019 with a vision to dismantle societal taboos and discrimination across Bangladesh. What began as a small group of adolescents has grown — under her leadership — into an internationally recognised movement of 35+ youth members, 1,500+ volunteers, and over 100,000 beneficiaries.</p>
                         <div class="hero-actions">
                             <a href="https://www.linkedin.com/in/nafiranayeemahmad/" target="_blank" rel="noopener" class="btn btn-primary">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34v-7.5H5.67v7.5h2.67zM7 9.67a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 8.67v-4.1c0-2.4-1.3-3.52-3.03-3.52-1.4 0-2.02.77-2.37 1.31v-1.13h-2.63c.04.75 0 7.5 0 7.5h2.63v-4.18c0-.24.02-.47.09-.65.18-.47.62-.96 1.34-.96.95 0 1.33.72 1.33 1.78v4.01h2.64z"/></svg>
@@ -207,8 +223,16 @@
             <div class="wrap">
                 <div class="section-eyebrow">Recognition</div>
                 <h2 class="reveal">Awards earned, <em>under her leadership.</em></h2>
-                <p class="reveal" style="color: rgba(255,255,255,0.75); font-size: 1.1rem; max-width: 640px; margin-top: 1rem;">Amplitude's recognition reflects the work of an entire youth-led team — but every milestone below was built on the foundation Nafira laid as founder.</p>
+                <p class="reveal" style="color: rgba(255,255,255,0.75); font-size: 1.1rem; max-width: 640px; margin-top: 1rem;">From a personal place on the Forbes 30 Under 30 list to Amplitude's collective honours — every milestone below was built on the foundation Nafira laid as founder.</p>
                 <div class="awards">
+                    <a href="https://www.forbes.com/30-under-30/2026/asia/social-impact?profile=nafira-nayeem-ahmad" target="_blank" rel="noopener" class="award award--featured reveal">
+                        <span class="award-year">2026</span>
+                        <div>
+                            <div class="award-name">Forbes 30 Under 30 — Asia <span class="aw-arr">↗</span></div>
+                            <div class="award-issuer">Social Impact category · Forbes · recognised at age 22</div>
+                        </div>
+                        <span class="award-tag">International</span>
+                    </a>
                     <div class="award reveal">
                         <span class="award-year">2024</span>
                         <div>
