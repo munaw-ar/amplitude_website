@@ -268,6 +268,18 @@
             background-size: 80px 80px;
             mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
         }
+        /* Amplitude waveform — the signature hero element */
+        .hero-wave {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            animation: waveFade 2s var(--ease) 0.5s forwards;
+        }
+        @keyframes waveFade { to { opacity: 1; } }
         .hero-inner {
             position: relative;
             z-index: 2;
@@ -948,6 +960,7 @@
         <section class="hero">
             <div class="hero-grid" aria-hidden="true"></div>
             <div class="hero-bg" aria-hidden="true"></div>
+            <canvas class="hero-wave" id="heroWave" aria-hidden="true"></canvas>
             <div class="wrap hero-inner">
                 <div>
                     <div class="hero-tag">Youth-led · Bangladesh · Est. 2019</div>
@@ -1282,6 +1295,90 @@
                 if (e.key === 'ArrowRight') showNext();
                 if (e.key === 'ArrowLeft') showPrev();
             });
+        })();
+
+        /* ---------- Hero amplitude waveform ---------- */
+        (() => {
+            const canvas = document.getElementById('heroWave');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Layered waves: tuned in the Amplitude crimson/blush palette.
+            const layers = [
+                { amp: 26, len: 0.0042, speed: 0.022, width: 2.0, color: 'rgba(255, 194, 194, 0.55)', y: 0.50 },
+                { amp: 40, len: 0.0030, speed: 0.014, width: 1.6, color: 'rgba(255, 110, 110, 0.40)', y: 0.56 },
+                { amp: 58, len: 0.0021, speed: 0.009, width: 1.3, color: 'rgba(255, 255, 255, 0.16)', y: 0.62 },
+            ];
+
+            let w = 0, h = 0, dpr = 1;
+            let scrollFactor = 1;   // grows as the hero scrolls
+            let mouse = { x: 0.5, active: 0 }; // 0..1 horizontal, influence 0..1
+
+            function resize() {
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                w = canvas.clientWidth;
+                h = canvas.clientHeight;
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            function drawWave(layer, phase) {
+                const baseY = h * layer.y;
+                ctx.beginPath();
+                for (let x = 0; x <= w; x += 6) {
+                    // gentle cursor swell: a soft bump centred on the pointer
+                    const dx = x / w - mouse.x;
+                    const bump = mouse.active * 22 * Math.exp(-(dx * dx) / 0.01);
+                    const amp = (layer.amp * scrollFactor) + bump;
+                    const y = baseY + Math.sin(x * layer.len + phase) * amp;
+                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.lineWidth = layer.width;
+                ctx.strokeStyle = layer.color;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+            }
+
+            let t = 0, raf = null;
+            function frame() {
+                ctx.clearRect(0, 0, w, h);
+                t += 1;
+                mouse.active *= 0.96; // ease cursor influence back out
+                layers.forEach(l => drawWave(l, t * l.speed));
+                raf = requestAnimationFrame(frame);
+            }
+
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+
+            // Scroll: amplitude swells, then the whole layer fades as you leave the hero.
+            const hero = document.querySelector('.hero');
+            window.addEventListener('scroll', () => {
+                const vh = window.innerHeight || 1;
+                const p = Math.min(window.scrollY / vh, 1);
+                scrollFactor = 1 + p * 0.6;
+                // Drop the CSS entrance animation so inline opacity can drive the fade-out.
+                if (p > 0 && canvas.style.animation !== 'none') canvas.style.animation = 'none';
+                canvas.style.opacity = String(Math.max(0, 1 - p * 1.1));
+            }, { passive: true });
+
+            // Cursor: soft swell follows the pointer across the hero.
+            hero.addEventListener('pointermove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                mouse.x = (e.clientX - rect.left) / rect.width;
+                mouse.active = 1;
+            }, { passive: true });
+
+            if (reduce) {
+                // Static, single calm wave — no animation.
+                drawWave(layers[1], 0);
+                canvas.style.animation = 'none';
+                canvas.style.opacity = '1';
+            } else {
+                frame();
+            }
         })();
     </script>
 </body>
