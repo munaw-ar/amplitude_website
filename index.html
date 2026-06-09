@@ -500,18 +500,19 @@
         }
         .stat {
             background: var(--primary);
-            padding: 2.5rem 2rem;
+            padding: 2.25rem 1.5rem;
             position: relative;
-            overflow: hidden;
         }
         .stat-num {
             font-family: var(--serif);
-            font-size: clamp(2.75rem, 5vw, 4.5rem);
+            /* sized so the widest value (100,000+) fits its column without clipping */
+            font-size: clamp(1.8rem, 3vw, 2.35rem);
             font-weight: 600;
             color: #ffc2c2;
-            line-height: 1;
+            line-height: 1.05;
             display: block;
-            margin-bottom: 0.65rem;
+            white-space: nowrap;
+            margin-bottom: 0.6rem;
             /* tabular figures keep every digit the same width so the number
                doesn't jitter/reflow while counting up */
             font-variant-numeric: tabular-nums;
