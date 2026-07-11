@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
           'Content-Type': 'application/json',
           apikey: SUPABASE_KEY,
           Authorization: `Bearer ${SUPABASE_KEY}`,
-          Prefer: 'return=minimal,resolution=ignore-duplicates',
+          Prefer: 'return=minimal',
         },
         body: JSON.stringify({
           email,
@@ -79,7 +79,10 @@ module.exports = async (req, res) => {
           mailerlite_id: mlId,
         }),
       });
-      sbOk = r.ok || r.status === 409; // 409 = already there = fine
+      // 201 = inserted; 409 = duplicate email (already subscribed) = also fine.
+      // (resolution=ignore-duplicates is intentionally NOT used — it forces an
+      // RLS eval that needs more than the insert-only policy and 401s.)
+      sbOk = r.ok || r.status === 409;
     } catch (_) { /* swallow */ }
   }
 
