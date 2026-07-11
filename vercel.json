@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.amplitudebd.com" }],
+      "destination": "https://amplitudebd.com/:path*",
+      "permanent": true
+    }
+  ]
+}
