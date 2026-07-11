@@ -276,6 +276,20 @@
             .kicker::before { animation: none; }
             .circled svg path { stroke-dashoffset: 0 !important; }
         }
+
+        /* ---- Newsletter signup ---- */
+        .fr-sub-block { margin-top: 2rem; max-width: 480px; }
+        .fr-sub-lead { margin: 0 0 0.7rem; font-size: 0.95rem; color: var(--maroon); font-weight: 600; line-height: 1.45; }
+        .fr-sub-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .fr-sub-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .fr-sub-input { flex: 1 1 180px; min-width: 0; font: inherit; font-size: 0.95rem; padding: 0.8rem 0.95rem; border: 1.5px solid rgba(107,0,0,0.28); border-radius: 8px; background: #fff; color: var(--ink); }
+        .fr-sub-input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(204,17,17,0.14); }
+        .fr-sub-btn { flex: 0 0 auto; font: 700 0.92rem/1 var(--sans); color: #fff; background: var(--red); border-radius: 8px; padding: 0.8rem 1.4rem; transition: background 0.2s; }
+        .fr-sub-btn:hover { background: var(--red-deep); }
+        .fr-sub-btn:disabled { opacity: 0.65; cursor: default; }
+        .fr-sub-msg { min-height: 1.1em; margin: 0.55rem 0 0; font-size: 0.85rem; }
+        .fr-sub-msg.ok { color: #0a7d2c; font-weight: 600; }
+        .fr-sub-msg.err { color: var(--red); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -427,6 +441,17 @@
                     /amplitudebd
                 </a>
             </div>
+            <div class="fr-sub-block reveal">
+                <p class="fr-sub-lead">Want to see exactly where your donation goes? Get relief updates &amp; fund reports by email.</p>
+                <form class="fr-sub" data-fr-source="flood-relief" novalidate>
+                    <label class="fr-sub-hp" aria-hidden="true">Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+                    <div class="fr-sub-row">
+                        <input class="fr-sub-input" type="email" name="email" required autocomplete="email" placeholder="you@email.com" aria-label="Email for relief updates">
+                        <button class="fr-sub-btn" type="submit">Subscribe</button>
+                    </div>
+                    <p class="fr-sub-msg" role="status" aria-live="polite"></p>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -522,6 +547,43 @@
             window.lenis = lenis;
         };
         if (window.Lenis) window.initLenis();
+
+        // ---- Newsletter signup ----
+        (function () {
+            var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            document.querySelectorAll('form.fr-sub').forEach(function (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var input = form.querySelector('input[name="email"]');
+                    var btn = form.querySelector('.fr-sub-btn');
+                    var msg = form.querySelector('.fr-sub-msg');
+                    var row = form.querySelector('.fr-sub-row');
+                    var hp = form.querySelector('input[name="company"]');
+                    var email = (input.value || '').trim();
+                    msg.className = 'fr-sub-msg';
+                    if (!EMAIL_RE.test(email)) { msg.textContent = 'Please enter a valid email.'; msg.classList.add('err'); input.focus(); return; }
+                    var orig = btn.textContent;
+                    btn.disabled = true; btn.textContent = 'Joining…';
+                    fetch('/api/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email, source: form.getAttribute('data-fr-source') || 'flood-relief', company: (hp && hp.value) || '' })
+                    })
+                    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
+                    .then(function (res) {
+                        if (res.ok && res.d && res.d.ok) {
+                            if (row) row.style.display = 'none';
+                            msg.textContent = '✓ You’re in — watch your inbox for relief updates.';
+                            msg.classList.add('ok');
+                        } else {
+                            msg.textContent = (res.d && res.d.error === 'invalid_email') ? 'Please enter a valid email.' : 'Hmm, that didn’t work — please try again.';
+                            msg.classList.add('err'); btn.disabled = false; btn.textContent = orig;
+                        }
+                    })
+                    .catch(function () { msg.textContent = 'Network error — please try again.'; msg.classList.add('err'); btn.disabled = false; btn.textContent = orig; });
+                });
+            });
+        })();
     </script>
 </body>
 </html>

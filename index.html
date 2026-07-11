@@ -1205,6 +1205,31 @@
         .fr-btn-primary:hover { background: #a30d0d; transform: translateY(-2px); }
         .fr-foot { margin: 0.9rem 0 0; font-size: 0.75rem; color: #7a736e; text-align: center; }
 
+        /* ---- Newsletter signup (shared: popup + homepage strip) ---- */
+        .fr-sub-block { margin-top: 1.2rem; padding-top: 1.1rem; border-top: 1px dashed rgba(107,0,0,0.25); }
+        .fr-sub-lead { margin: 0 0 0.7rem; font-size: 0.9rem; color: #6b0000; font-weight: 600; line-height: 1.4; }
+        .fr-sub-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .fr-sub-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .fr-sub-input { flex: 1 1 170px; min-width: 0; font: inherit; font-size: 0.95rem; padding: 0.7rem 0.85rem; border: 1.5px solid rgba(107,0,0,0.28); border-radius: 8px; background: #fff; color: var(--ink); }
+        .fr-sub-input:focus { outline: none; border-color: #c1121f; box-shadow: 0 0 0 3px rgba(193,18,31,0.14); }
+        .fr-sub-btn { flex: 0 0 auto; font: 700 0.9rem/1 var(--sans); color: #fff; background: #c1121f; border-radius: 8px; padding: 0.7rem 1.2rem; transition: background 0.2s; }
+        .fr-sub-btn:hover { background: #a30d0d; }
+        .fr-sub-btn:disabled { opacity: 0.65; cursor: default; }
+        .fr-sub-msg { min-height: 1.1em; margin: 0.5rem 0 0; font-size: 0.82rem; }
+        .fr-sub-msg.ok { color: #0a7d2c; font-weight: 600; }
+        .fr-sub-msg.err { color: #c1121f; font-weight: 600; }
+
+        /* ---- Homepage newsletter strip (before footer) ---- */
+        .newsletter-strip { background: var(--off-white); border-top: 1px solid var(--line); padding: clamp(3rem, 7vw, 5rem) 0; }
+        .ns-inner { max-width: 640px; }
+        .ns-eyebrow { font: 700 0.72rem/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--primary); margin-bottom: 1rem; }
+        .ns-title { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--ink); line-height: 1.1; margin: 0 0 0.6rem; letter-spacing: -0.01em; }
+        .ns-title em { color: var(--primary); font-style: italic; }
+        .ns-lead { font-size: 1.05rem; color: var(--ink-soft); margin: 0 0 1.5rem; max-width: 46ch; }
+        .newsletter-strip .fr-sub-row { max-width: 460px; }
+        .newsletter-strip .fr-sub-input { padding: 0.85rem 1rem; }
+        .newsletter-strip .fr-sub-btn { padding: 0.85rem 1.5rem; }
+
         /* Narrow phones: keep the bKash number + button tidy */
         @media (max-width: 400px) {
             .fr-inner { padding: 1.4rem 1.15rem 1.5rem; }
@@ -1256,6 +1281,17 @@
                     <li>Enter <b>01845690704</b> &rarr; amount &rarr; confirm with PIN</li>
                 </ol>
                 <a class="fr-btn fr-btn-primary" href="/flood-relief">Full details &amp; how to help &rarr;</a>
+                <div class="fr-sub-block">
+                    <p class="fr-sub-lead">See exactly where your donation goes &mdash; get relief updates &amp; fund reports by email.</p>
+                    <form class="fr-sub" data-fr-source="popup" novalidate>
+                        <label class="fr-sub-hp" aria-hidden="true">Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+                        <div class="fr-sub-row">
+                            <input class="fr-sub-input" type="email" name="email" required autocomplete="email" placeholder="you@email.com" aria-label="Email for relief updates">
+                            <button class="fr-sub-btn" type="submit">Subscribe</button>
+                        </div>
+                        <p class="fr-sub-msg" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
                 <p class="fr-foot">100% of funds go directly to relief distribution.</p>
             </div>
         </div>
@@ -1524,6 +1560,22 @@
             </div></div></div>
         </section>
     </main>
+
+    <section class="newsletter-strip">
+        <div class="wrap ns-inner reveal">
+            <p class="ns-eyebrow">Stay in the loop</p>
+            <h2 class="ns-title">See <em>where the money goes.</em></h2>
+            <p class="ns-lead">Subscribe for flood-relief updates, photos from the ground, and transparent reports on exactly how your donations are spent.</p>
+            <form class="fr-sub" data-fr-source="homepage" novalidate>
+                <label class="fr-sub-hp" aria-hidden="true">Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+                <div class="fr-sub-row">
+                    <input class="fr-sub-input" type="email" name="email" required autocomplete="email" placeholder="you@email.com" aria-label="Email for updates">
+                    <button class="fr-sub-btn" type="submit">Subscribe</button>
+                </div>
+                <p class="fr-sub-msg" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </section>
 
     <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Amplitude · Built by youth, for the people of Bangladesh.</div><ul class="footer-social"><li><a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener">Facebook</a></li><li><a href="mailto:nafira.nayeem@amplitudebd.com">Email</a></li><li><a href="tel:+8801845690704">Phone</a></li></ul></div></footer>
 
@@ -1855,7 +1907,7 @@
                 if (!modal.classList.contains('open')) return;
                 if (e.key === 'Escape') { closeModal(); return; }
                 if (e.key === 'Tab') {
-                    var f = modal.querySelectorAll('a[href], button:not([disabled])');
+                    var f = modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled])');
                     if (!f.length) return;
                     var first = f[0], last = f[f.length - 1];
                     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -1885,6 +1937,45 @@
                 try { sessionStorage.setItem('fr_popup_seen', '1'); } catch (e) {}
                 setTimeout(openModal, reduce ? 0 : 1200);
             }
+        })();
+    </script>
+
+    <!-- ===== Newsletter signup (popup + homepage) ===== -->
+    <script>
+        (function () {
+            var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            document.querySelectorAll('form.fr-sub').forEach(function (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var input = form.querySelector('input[name="email"]');
+                    var btn = form.querySelector('.fr-sub-btn');
+                    var msg = form.querySelector('.fr-sub-msg');
+                    var row = form.querySelector('.fr-sub-row');
+                    var hp = form.querySelector('input[name="company"]');
+                    var email = (input.value || '').trim();
+                    msg.className = 'fr-sub-msg';
+                    if (!EMAIL_RE.test(email)) { msg.textContent = 'Please enter a valid email.'; msg.classList.add('err'); input.focus(); return; }
+                    var orig = btn.textContent;
+                    btn.disabled = true; btn.textContent = 'Joining…';
+                    fetch('/api/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email, source: form.getAttribute('data-fr-source') || 'homepage', company: (hp && hp.value) || '' })
+                    })
+                    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
+                    .then(function (res) {
+                        if (res.ok && res.d && res.d.ok) {
+                            if (row) row.style.display = 'none';
+                            msg.textContent = '✓ You’re in — watch your inbox for relief updates.';
+                            msg.classList.add('ok');
+                        } else {
+                            msg.textContent = (res.d && res.d.error === 'invalid_email') ? 'Please enter a valid email.' : 'Hmm, that didn’t work — please try again.';
+                            msg.classList.add('err'); btn.disabled = false; btn.textContent = orig;
+                        }
+                    })
+                    .catch(function () { msg.textContent = 'Network error — please try again.'; msg.classList.add('err'); btn.disabled = false; btn.textContent = orig; });
+                });
+            });
         })();
     </script>
 </body>
