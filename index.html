@@ -1123,6 +1123,8 @@
         .fr-banner-dot { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: fr-pulse 1.6s ease-in-out infinite; }
         .fr-banner-text { font-weight: 500; }
         .fr-banner-text b { font-weight: 700; }
+        .fr-banner-link { text-decoration: none; }
+        .fr-banner-link:hover, .fr-banner-link:focus-visible { text-decoration: underline; text-underline-offset: 2px; }
         .fr-banner-cta {
             flex: 0 0 auto; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.02em;
             background: #fff; color: #8f0000; padding: 0.38rem 0.9rem; border-radius: 999px;
@@ -1225,7 +1227,7 @@
     <div class="fr-banner" id="frBanner" hidden>
         <div class="fr-banner-inner">
             <span class="fr-banner-dot" aria-hidden="true"></span>
-            <span class="fr-banner-text"><b>Flood emergency</b> &middot; Chittagong &amp; Bandarban relief</span>
+            <a href="/flood-relief" class="fr-banner-text fr-banner-link"><b>Flood Emergency</b> &middot; Chittagong &amp; Bandarban Relief</a>
             <button class="fr-banner-cta" type="button" data-fr-open>Donate now</button>
             <button class="fr-banner-close" type="button" id="frBannerClose" aria-label="Dismiss flood relief banner">&times;</button>
         </div>
@@ -1269,7 +1271,7 @@
                 <li><a href="#method">Method</a></li>
                 <li><a href="#stories">Stories</a></li>
                 <li><a href="/coming-soon" style="display:none;" aria-hidden="true">Blog</a></li>
-                <li><a href="/flood-relief" class="nav-donate">Donate Now</a></li>
+                <li><a href="/flood-relief" class="nav-donate">Flood Relief</a></li>
                 <li><a href="#contact" class="nav-cta">Get in touch</a></li>
             </ul>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
