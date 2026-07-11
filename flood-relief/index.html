@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Relief — Chittagong &amp; Bandarban | Amplitude.bd</title>
+    <meta name="description" content="Amplitude.bd is taking donations for flood victims in Chittagong and Bandarban. Families have lost their homes — your bKash donation gets emergency food, water, shelter and medical aid there fast.">
+    <meta name="theme-color" content="#6b0000">
+
+    <!-- Open Graph / social share -->
+    <meta property="og:title" content="Taking Donations for Flood Victims in Chittagong &amp; Bandarban">
+    <meta property="og:description" content="Families have lost their homes. Your support gets relief there fast. Donate via bKash: 01845690704.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amplitudebd.com/flood-relief">
+    <!-- SWAP: add og:image once the poster/hero photo exists, e.g. https://amplitudebd.com/images/flood/og.jpg -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Anton = condensed all-caps display (per brief); Inter = body; Fraunces = brand accent (matches site) -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Brand tokens — kept identical to the main site */
+            --primary: #8f0000;
+            --primary-dark: #6b0000;
+            --primary-light: #b31a1a;
+            --white: #ffffff;
+            --off-white: #fef9f9;
+            --cream: #faf6f1;
+            --ink: #111111;
+            --ink-soft: #2c2c2c;
+            --line: rgba(0, 0, 0, 0.08);
+            /* Flood-page accents */
+            --maroon: #6b0000;      /* deep brown/maroon headlines + primary text */
+            --red: #cc1111;         /* bright red — urgent info, CTAs, highlights */
+            --red-deep: #a30d0d;
+            --paper: #f4ede4;       /* torn-stub paper */
+            --paper-edge: #ece2d4;
+            --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --display: 'Anton', 'Arial Narrow', var(--sans);
+            --max: 760px;           /* single-column, mobile-first */
+            --pad: clamp(1.15rem, 5vw, 2.5rem);
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * { box-sizing: border-box; }
+        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip; }
+        body {
+            font-family: var(--sans);
+            font-size: 17px; line-height: 1.6;
+            color: var(--ink-soft);
+            background: var(--cream);
+            margin: 0;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        button { font-family: inherit; cursor: pointer; border: 0; background: none; }
+        h1, h2, h3 { margin: 0; }
+
+        .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+        /* ---------------- NAV (shared with site) ---------------- */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(250, 246, 241, 0.82);
+            backdrop-filter: saturate(140%) blur(12px);
+            -webkit-backdrop-filter: saturate(140%) blur(12px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+        }
+        .nav.scrolled { border-bottom-color: var(--line); background: rgba(250, 246, 241, 0.94); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1280px; }
+        .brand { display: flex; align-items: center; gap: 0.6rem; font-family: var(--serif); font-weight: 600; font-size: 1.1rem; color: var(--maroon); letter-spacing: -0.01em; }
+        .brand-mark { width: 30px; height: 30px; object-fit: contain; }
+        .nav-links { display: flex; align-items: center; gap: 1.6rem; list-style: none; margin: 0; padding: 0; }
+        .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--maroon); }
+        .nav-donate {
+            font-weight: 700 !important; color: var(--red) !important;
+            border: 1.5px solid currentColor; border-radius: 999px; padding: 0.4rem 0.9rem;
+            transition: background 0.2s, color 0.2s !important;
+        }
+        .nav-donate.active, .nav-donate:hover { background: var(--red); color: var(--white) !important; }
+        .nav-cta { color: var(--maroon) !important; font-weight: 600 !important; }
+        .menu-toggle { display: none; width: 40px; height: 40px; flex-direction: column; justify-content: center; gap: 5px; }
+        .menu-toggle span { display: block; height: 2px; width: 22px; background: var(--maroon); margin: 0 auto; transition: transform 0.3s var(--ease), opacity 0.2s; }
+        .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        @media (max-width: 720px) {
+            .menu-toggle { display: flex; }
+            .nav-links {
+                position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0.4rem;
+                background: var(--cream); padding: 1rem var(--pad) 1.5rem; border-bottom: 1px solid var(--line);
+                transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s var(--ease);
+            }
+            .nav-links.open { transform: none; opacity: 1; pointer-events: auto; }
+            .nav-links li { width: 100%; }
+            .nav-donate { display: inline-block; }
+        }
+
+        /* ---------------- Torn ticket-stub panel ---------------- */
+        /* Scalloped/perforated top + bottom edges via CSS mask (reveals whatever is behind, incl. photos). */
+        .stub {
+            --r: 11px; /* scallop radius */
+            position: relative;
+            background: var(--paper);
+            padding: clamp(1.6rem, 5vw, 2.6rem);
+            -webkit-mask:
+                radial-gradient(var(--r) at 50% 0%, #0000 98%, #000 100%) 0 0 / calc(2 * var(--r)) 51% repeat-x,
+                radial-gradient(var(--r) at 50% 100%, #0000 98%, #000 100%) 0 100% / calc(2 * var(--r)) 51% repeat-x;
+                    mask:
+                radial-gradient(var(--r) at 50% 0%, #0000 98%, #000 100%) 0 0 / calc(2 * var(--r)) 51% repeat-x,
+                radial-gradient(var(--r) at 50% 100%, #0000 98%, #000 100%) 0 100% / calc(2 * var(--r)) 51% repeat-x;
+        }
+
+        /* Dotted horizontal tear-line + side notches (used inside the donate ticket) */
+        .tear {
+            position: relative; height: 0; margin: clamp(1.4rem, 4vw, 2rem) 0;
+            border-top: 2px dashed rgba(107, 0, 0, 0.35);
+        }
+        .tear::before, .tear::after {
+            content: ""; position: absolute; top: 50%; width: 22px; height: 22px; border-radius: 50%;
+            background: var(--cream); transform: translateY(-50%);
+        }
+        .tear::before { left: calc(-1 * clamp(1.6rem, 5vw, 2.6rem) - 11px); }
+        .tear::after  { right: calc(-1 * clamp(1.6rem, 5vw, 2.6rem) - 11px); }
+
+        /* ---------------- Grayscale photo placeholders (swap later) ---------------- */
+        .photo-ph {
+            position: relative; overflow: hidden;
+            background:
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.045) 0 2px, transparent 2px 7px),
+                linear-gradient(135deg, #d8d3cd 0%, #b3ada7 55%, #8b857f 100%);
+            filter: grayscale(1) contrast(1.03);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .photo-ph .ph-label {
+            font: 600 0.7rem/1.35 var(--sans); text-transform: uppercase; letter-spacing: 0.14em;
+            color: #4a4640; background: rgba(255,255,255,0.72); border: 1px dashed rgba(0,0,0,0.35);
+            padding: 0.5rem 0.85rem; border-radius: 4px; text-align: center; max-width: 80%;
+        }
+
+        /* ---------------- HERO ---------------- */
+        .hero { position: relative; padding-top: 64px; }
+        .hero-photo {
+            position: absolute; inset: 0; height: 100%;
+        }
+        .hero-photo::after { /* documentary darkening so the cream stub pops */
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(20,8,8,0.35) 0%, rgba(20,8,8,0.15) 40%, rgba(107,0,0,0.55) 100%);
+        }
+        .hero-photo { align-items: flex-end; justify-content: flex-end; padding: 1.1rem 1.3rem; }
+        .hero-photo .ph-label { position: relative; z-index: 1; max-width: 240px; }
+        .hero-inner {
+            position: relative; z-index: 2;
+            min-height: min(88vh, 720px);
+            display: flex; align-items: flex-end;
+            padding: clamp(2rem, 8vw, 5rem) 0 clamp(2.5rem, 7vw, 4.5rem);
+        }
+        .hero-stub { max-width: 560px; box-shadow: 0 26px 60px -28px rgba(0,0,0,0.6); }
+        .kicker {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font: 700 0.72rem/1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--white); background: var(--red); padding: 0.5rem 0.8rem; border-radius: 3px; margin-bottom: 1.1rem;
+        }
+        .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--white); animation: pulse 1.6s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+        h1.hero-h {
+            font-family: var(--display); font-weight: 400;
+            font-size: clamp(1.85rem, 6.4vw, 2.9rem); line-height: 1.0; letter-spacing: 0.005em;
+            text-transform: uppercase; color: var(--maroon); overflow-wrap: break-word;
+        }
+        .hero-h-lead { display: block; }
+        /* hand-drawn circle around the location */
+        .circled { position: relative; display: inline-block; margin-top: 0.2em; color: var(--red); max-width: 100%; }
+        .circled svg { position: absolute; left: -9%; top: -10%; width: 118%; height: 120%; overflow: visible; pointer-events: none; transform: rotate(-1.5deg); }
+        .circled svg path { fill: none; stroke: var(--red); stroke-width: 4; stroke-linecap: round; }
+        .hero-sub { margin: 1.15rem 0 1.5rem; font-size: clamp(1rem, 2.4vw, 1.15rem); color: var(--ink); max-width: 42ch; }
+
+        /* ---------------- Buttons ---------------- */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font: 700 0.92rem/1 var(--sans); letter-spacing: 0.01em;
+            padding: 0.95rem 1.5rem; border-radius: 6px; transition: transform 0.15s var(--ease), box-shadow 0.2s, background 0.2s;
+        }
+        .btn-red { background: var(--red); color: var(--white); box-shadow: 0 10px 22px -12px rgba(204,17,17,0.9); }
+        .btn-red:hover { background: var(--red-deep); transform: translateY(-2px); }
+        .btn-ghost { border: 1.5px solid var(--maroon); color: var(--maroon); }
+        .btn-ghost:hover { background: var(--maroon); color: var(--white); }
+
+        /* ---------------- Sections ---------------- */
+        section { padding: clamp(3rem, 9vw, 5rem) 0; }
+        .eyebrow {
+            font: 700 0.72rem/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 1rem;
+        }
+        h2.sec-h {
+            font-family: var(--display); font-weight: 400; text-transform: uppercase;
+            font-size: clamp(1.6rem, 5.5vw, 2.4rem); line-height: 1.02; color: var(--maroon); margin-bottom: 1.1rem;
+        }
+        .lead { font-size: 1.08rem; color: var(--ink); }
+        .lead + .lead { margin-top: 1rem; }
+
+        .happening { background: var(--off-white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .happening-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 1.8rem; }
+        .happening-photos .photo-ph { aspect-ratio: 4/3; border-radius: 8px; }
+        @media (max-width: 520px) { .happening-photos { grid-template-columns: 1fr; } }
+
+        /* Where donations go */
+        .uses { list-style: none; margin: 1.8rem 0 0; padding: 0; display: grid; gap: 0.7rem; }
+        .use {
+            display: flex; align-items: center; gap: 1rem;
+            background: var(--white); border: 1px solid var(--line); border-left: 4px solid var(--red);
+            border-radius: 8px; padding: 1rem 1.15rem;
+        }
+        .use svg { flex: 0 0 26px; width: 26px; height: 26px; stroke: var(--red); fill: none; stroke-width: 1.9; }
+        .use-t { font-weight: 700; color: var(--maroon); font-size: 1.02rem; }
+        .use-d { font-size: 0.9rem; color: var(--ink-soft); }
+
+        /* Donate block */
+        .donate { background: linear-gradient(180deg, var(--maroon), #4d0000); color: var(--white); }
+        .donate .eyebrow { color: #ff8a8a; }
+        .donate-ticket { --paper: #fbf4ec; color: var(--ink); margin-top: 1.5rem; box-shadow: 0 30px 70px -30px rgba(0,0,0,0.7); }
+        .donate-ticket h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(1.3rem, 4.5vw, 1.7rem); color: var(--maroon); letter-spacing: 0.01em; }
+        .bkash-label { font: 700 0.7rem/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin: 1.4rem 0 0.5rem; }
+        .bkash-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+        .bkash-num {
+            font-family: var(--display); font-weight: 400; font-size: clamp(2.1rem, 9vw, 3rem); line-height: 1;
+            letter-spacing: 0.02em; color: var(--red); font-variant-numeric: tabular-nums;
+        }
+        .copy-btn {
+            display: inline-flex; align-items: center; gap: 0.4rem; font: 600 0.82rem/1 var(--sans);
+            color: var(--maroon); border: 1.5px solid var(--maroon); border-radius: 6px; padding: 0.6rem 0.85rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .copy-btn:hover { background: var(--maroon); color: var(--white); }
+        .copy-btn.done { background: #0a7d2c; border-color: #0a7d2c; color: #fff; }
+        .send-steps { margin: 1.2rem 0 0; padding-left: 1.1rem; font-size: 0.92rem; color: var(--ink-soft); }
+        .send-steps li { margin: 0.3rem 0; }
+        .send-steps b { color: var(--maroon); }
+        .donate-note { margin-top: 1.4rem; font-size: 0.85rem; color: rgba(255,255,255,0.82); display: flex; gap: 0.6rem; align-items: flex-start; }
+        .donate-note svg { flex: 0 0 18px; width: 18px; height: 18px; stroke: #ff8a8a; fill: none; stroke-width: 2; margin-top: 1px; }
+
+        /* Stay updated */
+        .social-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.6rem; }
+        .social-link {
+            display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 600; color: var(--maroon);
+            border: 1.5px solid var(--line); border-radius: 999px; padding: 0.7rem 1.15rem; transition: border-color 0.2s, transform 0.15s;
+        }
+        .social-link:hover { border-color: var(--maroon); transform: translateY(-2px); }
+        .social-link svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* About + footer */
+        .about { background: var(--off-white); border-top: 1px solid var(--line); }
+        .about p { font-size: 1rem; color: var(--ink-soft); }
+        .about .serif { font-family: var(--serif); }
+        footer { background: var(--maroon); color: rgba(255,255,255,0.85); padding: 2rem 0; font-size: 0.85rem; }
+        .footer-inner { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; max-width: 1280px; }
+        .footer-social { display: flex; gap: 1.2rem; list-style: none; margin: 0; padding: 0; }
+        .footer-social a { color: rgba(255,255,255,0.85); transition: color 0.2s; }
+        .footer-social a:hover { color: #fff; }
+        .footer-back { margin-top: 0.6rem; }
+        .footer-back a { color: #ffc2c2; }
+
+        /* ---------------- Reveal on scroll ---------------- */
+        .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+        .reveal.in { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .kicker::before { animation: none; }
+            .circled svg path { stroke-dashoffset: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAV (shared with amplitudebd.com) ===== -->
+    <nav class="nav" id="nav">
+        <div class="wrap nav-inner">
+            <a href="/" class="brand" aria-label="Amplitude home">
+                <img src="/logo_amplitude.png" alt="Amplitude logo" class="brand-mark">
+                Amplitude
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#story">Our Story</a></li>
+                <li><a href="/#team">Team</a></li>
+                <li><a href="/#method">Method</a></li>
+                <li><a href="/#stories">Stories</a></li>
+                <li><a href="/flood-relief" class="nav-donate active" aria-current="page">Donate Now</a></li>
+                <li><a href="/#contact" class="nav-cta">Get in touch</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <!-- SWAP: replace this .photo-ph div with a real grayscale hero photo:
+             <img class="hero-photo" src="/images/flood/hero.jpg" alt="Amplitude volunteers delivering flood relief in Chittagong">
+             (keep filter grayscale on it, or upload an already-desaturated shot) -->
+        <div class="hero-photo photo-ph">
+            <span class="ph-label">Hero photo — grayscale relief volunteers on the ground<br>(rain, ponchos, on-ground work)</span>
+        </div>
+        <div class="wrap hero-inner">
+            <div class="stub hero-stub reveal">
+                <span class="kicker">Urgent · Flood Relief</span>
+                <h1 class="hero-h">
+                    <span class="hero-h-lead">Taking donations for flood victims in</span>
+                    <span class="circled">Chittagong &amp;<br>Bandarban
+                        <svg viewBox="0 0 300 150" preserveAspectRatio="none" aria-hidden="true">
+                            <path class="ellipse" d="M14,74 C22,30 96,12 152,14 C232,17 292,30 288,74 C284,118 206,140 146,136 C58,130 6,118 14,74 Z"/>
+                        </svg>
+                    </span>
+                </h1>
+                <p class="hero-sub">Families have lost their homes. Your support gets emergency relief there fast.</p>
+                <a href="#donate" class="btn btn-red">Donate now &darr;</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== 2. WHAT'S HAPPENING ===== -->
+    <section class="happening">
+        <div class="wrap">
+            <p class="eyebrow reveal">What's happening</p>
+            <h2 class="sec-h reveal">Floodwaters have swept through hillside communities</h2>
+            <p class="lead reveal">Days of relentless rain have flooded villages across Chittagong and Bandarban, submerging homes and cutting off entire hillside communities. Families are stranded without clean water, food, or dry shelter.</p>
+            <p class="lead reveal">Amplitude volunteers are on the ground coordinating with local networks to move emergency supplies to the worst-hit areas — but the need is growing faster than we can meet it alone.</p>
+            <div class="happening-photos reveal">
+                <!-- SWAP: replace each .photo-ph with <img src="/images/flood/relief-1.jpg" alt="..."> -->
+                <div class="photo-ph"><span class="ph-label">Relief photo 1</span></div>
+                <div class="photo-ph"><span class="ph-label">Relief photo 2</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 3. WHERE YOUR DONATION GOES ===== -->
+    <section>
+        <div class="wrap">
+            <p class="eyebrow reveal">Where your donation goes</p>
+            <h2 class="sec-h reveal">Every taka goes straight to the ground</h2>
+            <ul class="uses reveal">
+                <li class="use">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s5 5.5 5 9a5 5 0 0 1-10 0c0-3.5 5-9 5-9z"/></svg>
+                    <div><div class="use-t">Emergency food &amp; clean water</div><div class="use-d">Dry rations and safe drinking water for stranded families</div></div>
+                </li>
+                <li class="use">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+                    <div><div class="use-t">Shelter support</div><div class="use-d">Tarpaulins, dry clothing and bedding to keep families safe</div></div>
+                </li>
+                <li class="use">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v8M8 12h8"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+                    <div><div class="use-t">Medical aid &amp; first-aid kits</div><div class="use-d">Basic medicine and first-aid for injury and waterborne illness</div></div>
+                </li>
+                <li class="use">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 20c0-2 1.5-3.5 3.5-3.5"/></svg>
+                    <div><div class="use-t">On-ground coordination</div><div class="use-d">Working hand-in-hand with local volunteers to reach the worst-hit</div></div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== 4. DONATE NOW ===== -->
+    <section class="donate" id="donate">
+        <div class="wrap">
+            <p class="eyebrow reveal">Donate now</p>
+            <h2 class="sec-h reveal" style="color:#fff;">Send relief in under a minute</h2>
+            <p class="lead reveal" style="color:rgba(255,255,255,0.9);">Send any amount via bKash — it goes directly to relief distribution on the ground.</p>
+
+            <div class="stub donate-ticket reveal">
+                <h3>bKash — Send Money</h3>
+                <p class="bkash-label">bKash number</p>
+                <div class="bkash-row">
+                    <span class="bkash-num" id="bkashNum">01845690704</span>
+                    <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy bKash number">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+                        Copy
+                    </button>
+                </div>
+                <div class="tear"></div>
+                <ol class="send-steps">
+                    <li>Open <b>bKash</b> &rarr; tap <b>Send Money</b></li>
+                    <li>Enter <b>01845690704</b></li>
+                    <li>Enter the amount &rarr; confirm with your PIN</li>
+                </ol>
+                <p aria-live="polite" id="copyStatus" style="min-height:1.1em;font-size:0.82rem;color:#0a7d2c;font-weight:600;margin:0.7rem 0 0;"></p>
+            </div>
+
+            <p class="donate-note reveal">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+                Prefer another way to give, or want to donate a large amount? Message us on
+                <a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">Instagram</a> or
+                <a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">Facebook</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== 5. TRANSPARENCY NOTE ===== -->
+    <section style="padding-top:clamp(2.2rem,7vw,3.4rem);padding-bottom:clamp(2.2rem,7vw,3.4rem);">
+        <div class="wrap">
+            <p class="lead reveal" style="text-align:center;max-width:52ch;margin:0 auto;color:var(--maroon);font-weight:600;">
+                100% of funds go directly to relief distribution. We post updates and photos from the ground as aid is delivered.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== 6. STAY UPDATED ===== -->
+    <section class="happening" style="text-align:left;">
+        <div class="wrap">
+            <p class="eyebrow reveal">Stay updated</p>
+            <h2 class="sec-h reveal">Follow the relief effort in real time</h2>
+            <p class="lead reveal">We share live updates, photos and distribution reports across our social channels.</p>
+            <div class="social-row reveal">
+                <a class="social-link" href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38zm6.94-11.4a1.58 1.58 0 1 1-1.57-1.58 1.58 1.58 0 0 1 1.57 1.58z"/></svg>
+                    @amplitude.bd
+                </a>
+                <a class="social-link" href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+                    /amplitudebd
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 7. ABOUT ===== -->
+    <section class="about">
+        <div class="wrap">
+            <p class="eyebrow reveal">About Amplitude</p>
+            <p class="serif reveal" style="font-size:1.15rem;color:var(--maroon);line-height:1.5;">
+                Amplitude is a youth-led non-profit in Bangladesh working on civic engagement, diversity and equity, and rapid community response in times of crisis.
+            </p>
+            <p class="reveal" style="margin-top:1.1rem;"><a href="/" class="btn btn-ghost">&larr; Back to Amplitude</a></p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER (shared) ===== -->
+    <footer>
+        <div class="wrap footer-inner">
+            <div>
+                &copy; <span id="year"></span> Amplitude &middot; Built by youth, for the people of Bangladesh.
+                <div class="footer-back"><a href="/">&larr; Back to main site</a></div>
+            </div>
+            <ul class="footer-social">
+                <li><a href="https://www.instagram.com/amplitude.bd/" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="https://www.facebook.com/amplitudebd/" target="_blank" rel="noopener">Facebook</a></li>
+                <li><a href="mailto:nafira.nayeem@amplitudebd.com">Email</a></li>
+                <li><a href="tel:+8801845690704">Phone</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script async src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" onload="window.initLenis && window.initLenis()"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Nav: shadow on scroll + mobile menu toggle
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+        const toggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { toggle.classList.remove('open'); navLinks.classList.remove('open'); }));
+
+        // Reveal on scroll
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // Hand-drawn ellipse: draw itself in when the hero reveals (unless reduced-motion)
+        (function() {
+            const path = document.querySelector('.circled .ellipse');
+            if (!path || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const len = path.getTotalLength();
+            path.style.strokeDasharray = len;
+            path.style.strokeDashoffset = len;
+            path.style.transition = 'stroke-dashoffset 1s cubic-bezier(0.22,1,0.36,1) 0.35s';
+            requestAnimationFrame(() => requestAnimationFrame(() => { path.style.strokeDashoffset = '0'; }));
+        })();
+
+        // Copy bKash number
+        (function() {
+            const btn = document.getElementById('copyBtn');
+            const status = document.getElementById('copyStatus');
+            const num = '01845690704';
+            btn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(num);
+                } catch (e) {
+                    // Fallback for older browsers
+                    const t = document.createElement('textarea'); t.value = num; document.body.appendChild(t); t.select();
+                    try { document.execCommand('copy'); } catch (_) {} document.body.removeChild(t);
+                }
+                btn.classList.add('done');
+                btn.childNodes[btn.childNodes.length - 1].nodeValue = ' Copied';
+                status.textContent = 'bKash number copied to clipboard.';
+                setTimeout(() => { btn.classList.remove('done'); btn.childNodes[btn.childNodes.length - 1].nodeValue = ' Copy'; status.textContent = ''; }, 2200);
+            });
+        })();
+
+        // Buttery smooth scroll (shared with site) — async, respects reduced-motion
+        window.initLenis = function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion || !window.Lenis || window.lenis) return;
+            const lenis = new Lenis({ duration: 1.1, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    const id = a.getAttribute('href');
+                    if (id.length > 1) { const target = document.querySelector(id); if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -64 }); } }
+                });
+            });
+            window.lenis = lenis;
+        };
+        if (window.Lenis) window.initLenis();
+    </script>
+</body>
+</html>

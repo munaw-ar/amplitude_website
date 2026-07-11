@@ -1106,9 +1106,156 @@
             .upcoming-card { grid-template-columns: 1fr; }
             .upcoming-date { flex-direction: row; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-right: 0; padding-bottom: 1rem; gap: 0.75rem; }
         }
+        /* ===== Flood relief: urgent banner + donation popup ===== */
+        :root { --fr-banner-h: 0px; }
+
+        .fr-banner {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 130;
+            background: linear-gradient(90deg, #8f0000 0%, #c1121f 100%);
+            color: #fff; box-shadow: 0 2px 14px rgba(0,0,0,0.25);
+        }
+        .fr-banner[hidden] { display: none; }
+        .fr-banner-inner {
+            max-width: var(--max); margin: 0 auto; padding: 0.55rem var(--pad);
+            display: flex; align-items: center; gap: 0.85rem; justify-content: center;
+            font-size: 0.9rem; line-height: 1.3;
+        }
+        .fr-banner-dot { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: fr-pulse 1.6s ease-in-out infinite; }
+        .fr-banner-text { font-weight: 500; }
+        .fr-banner-text b { font-weight: 700; }
+        .fr-banner-cta {
+            flex: 0 0 auto; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.02em;
+            background: #fff; color: #8f0000; padding: 0.38rem 0.9rem; border-radius: 999px;
+            transition: transform 0.15s var(--ease), background 0.2s;
+        }
+        .fr-banner-cta:hover { transform: translateY(-1px); background: #fff2f2; }
+        .fr-banner-close {
+            flex: 0 0 auto; margin-left: 0.15rem; width: 26px; height: 26px; border-radius: 50%;
+            color: #fff; font-size: 1.15rem; line-height: 1; display: grid; place-items: center; opacity: 0.85;
+            transition: background 0.2s, opacity 0.2s;
+        }
+        .fr-banner-close:hover { background: rgba(255,255,255,0.18); opacity: 1; }
+
+        /* Shift the fixed nav down while the banner shows */
+        .nav { transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease), top 0.3s var(--ease); }
+        body.fr-has-banner .nav { top: var(--fr-banner-h); }
+
+        @keyframes fr-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.8); } }
+
+        @media (max-width: 600px) {
+            .fr-banner-inner { flex-wrap: wrap; justify-content: flex-start; gap: 0.5rem 0.7rem; font-size: 0.82rem; }
+            .fr-banner-cta { margin-left: auto; }
+        }
+
+        /* Popup modal */
+        .fr-modal {
+            position: fixed; inset: 0; z-index: 300; display: none;
+            align-items: center; justify-content: center; padding: 1.25rem;
+            overflow-y: auto; -webkit-overflow-scrolling: touch;
+            background: rgba(30, 6, 6, 0.62); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+        }
+        .fr-modal.open { display: flex; }
+        .fr-dialog {
+            position: relative; width: 100%; max-width: 430px; margin: auto;
+            background: #fff; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 40px 90px -30px rgba(0,0,0,0.6); font-family: var(--sans);
+        }
+        .fr-modal.open .fr-dialog { animation: fr-pop 0.4s var(--ease) both; }
+        @keyframes fr-pop { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+        .fr-accent { height: 6px; background: linear-gradient(90deg, #8f0000, #c1121f); }
+        .fr-inner { padding: 1.6rem 1.5rem 1.7rem; }
+        .fr-close {
+            position: absolute; top: 0.7rem; right: 0.7rem; width: 34px; height: 34px; border-radius: 50%;
+            display: grid; place-items: center; color: #6b0000; font-size: 1.35rem; line-height: 1;
+            background: rgba(143,0,0,0.06); transition: background 0.2s; z-index: 2;
+        }
+        .fr-close:hover { background: rgba(143,0,0,0.14); }
+        .fr-badge {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+            color: #fff; background: #c1121f; padding: 0.4rem 0.7rem; border-radius: 4px;
+        }
+        .fr-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: fr-pulse 1.6s ease-in-out infinite; }
+        .fr-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; line-height: 1.15; color: #6b0000; margin: 1rem 0 0.5rem; letter-spacing: -0.01em; }
+        .fr-desc { font-size: 0.95rem; color: var(--ink-soft); margin: 0 0 1.1rem; }
+        .fr-bkash { background: #faf6f1; border: 1px solid rgba(143,0,0,0.12); border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 1.1rem; }
+        .fr-bkash-label { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #c1121f; }
+        .fr-bkash-row { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: 0.3rem; }
+        .fr-bkash-num { font-family: var(--serif); font-weight: 700; font-size: 1.7rem; color: #8f0000; font-variant-numeric: tabular-nums; }
+        .fr-copy {
+            flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.35rem; font: 600 0.8rem/1 var(--sans);
+            color: #8f0000; border: 1.5px solid #8f0000; border-radius: 7px; padding: 0.5rem 0.7rem; transition: background 0.2s, color 0.2s;
+        }
+        .fr-copy:hover { background: #8f0000; color: #fff; }
+        .fr-copy.done { background: #0a7d2c; border-color: #0a7d2c; color: #fff; }
+        .fr-steps { margin: 0 0 1.2rem; padding-left: 1.1rem; font-size: 0.85rem; color: var(--ink-soft); }
+        .fr-steps li { margin: 0.2rem 0; }
+        .fr-steps b { color: #8f0000; }
+        .fr-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+            font: 700 0.92rem/1 var(--sans); padding: 0.9rem 1.2rem; border-radius: 8px; width: 100%;
+            transition: transform 0.15s var(--ease), background 0.2s;
+        }
+        .fr-btn-primary { background: #c1121f; color: #fff; box-shadow: 0 10px 22px -12px rgba(193,18,31,0.9); }
+        .fr-btn-primary:hover { background: #a30d0d; transform: translateY(-2px); }
+        .fr-foot { margin: 0.9rem 0 0; font-size: 0.75rem; color: #7a736e; text-align: center; }
+
+        /* Narrow phones: keep the bKash number + button tidy */
+        @media (max-width: 400px) {
+            .fr-inner { padding: 1.4rem 1.15rem 1.5rem; }
+            .fr-title { font-size: 1.35rem; }
+            .fr-bkash-num { font-size: 1.4rem; }
+        }
+        @media (max-width: 340px) {
+            .fr-bkash-num { font-size: 1.2rem; }
+            .fr-bkash-row { flex-wrap: wrap; row-gap: 0.55rem; }
+            .fr-copy { margin-left: auto; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fr-modal.open .fr-dialog { animation: none; }
+            .fr-banner-dot, .fr-badge::before { animation: none; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- ===== Flood relief: urgent top banner ===== -->
+    <div class="fr-banner" id="frBanner" hidden>
+        <div class="fr-banner-inner">
+            <span class="fr-banner-dot" aria-hidden="true"></span>
+            <span class="fr-banner-text"><b>Flood emergency</b> &middot; Chittagong &amp; Bandarban relief</span>
+            <button class="fr-banner-cta" type="button" data-fr-open>Donate now</button>
+            <button class="fr-banner-close" type="button" id="frBannerClose" aria-label="Dismiss flood relief banner">&times;</button>
+        </div>
+    </div>
+
+    <!-- ===== Flood relief: donation popup ===== -->
+    <div class="fr-modal" id="frModal" role="dialog" aria-modal="true" aria-labelledby="frTitle" aria-hidden="true">
+        <div class="fr-dialog" role="document">
+            <div class="fr-accent"></div>
+            <button class="fr-close" type="button" id="frClose" aria-label="Close">&times;</button>
+            <div class="fr-inner">
+                <span class="fr-badge">Urgent &middot; Flood Relief</span>
+                <h2 class="fr-title" id="frTitle">Flood emergency in Chittagong &amp; Bandarban</h2>
+                <p class="fr-desc">Families have lost their homes. Donate via bKash and your support gets emergency food, water, shelter and medical aid there fast.</p>
+                <div class="fr-bkash">
+                    <div class="fr-bkash-label">bKash &middot; Send Money</div>
+                    <div class="fr-bkash-row">
+                        <span class="fr-bkash-num">01845690704</span>
+                        <button class="fr-copy" type="button" id="frCopy"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>Copy</button>
+                    </div>
+                </div>
+                <ol class="fr-steps">
+                    <li>Open <b>bKash</b> &rarr; tap <b>Send Money</b></li>
+                    <li>Enter <b>01845690704</b> &rarr; amount &rarr; confirm with PIN</li>
+                </ol>
+                <a class="fr-btn fr-btn-primary" href="/flood-relief">Full details &amp; how to help &rarr;</a>
+                <p class="fr-foot">100% of funds go directly to relief distribution.</p>
+            </div>
+        </div>
+    </div>
 
     <nav class="nav" id="nav">
         <div class="wrap nav-inner">
@@ -1122,7 +1269,7 @@
                 <li><a href="#method">Method</a></li>
                 <li><a href="#stories">Stories</a></li>
                 <li><a href="/coming-soon" style="display:none;" aria-hidden="true">Blog</a></li>
-                <li><a href="/coming-soon" class="nav-donate">Donate Now</a></li>
+                <li><a href="/flood-relief" class="nav-donate">Donate Now</a></li>
                 <li><a href="#contact" class="nav-cta">Get in touch</a></li>
             </ul>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
@@ -1651,6 +1798,88 @@
                     });
                 }, { threshold: 0 });
                 vis.observe(hero);
+            }
+        })();
+    </script>
+
+    <!-- ===== Flood relief: banner + popup behaviour ===== -->
+    <script>
+        (function() {
+            var banner = document.getElementById('frBanner');
+            var bannerClose = document.getElementById('frBannerClose');
+            var modal = document.getElementById('frModal');
+            var closeBtn = document.getElementById('frClose');
+            var copyBtn = document.getElementById('frCopy');
+            if (!banner || !modal) return;
+            var lastFocus = null;
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function setOffset() {
+                document.documentElement.style.setProperty('--fr-banner-h', (banner.hidden ? 0 : banner.offsetHeight) + 'px');
+            }
+            function showBanner() {
+                if (sessionStorage.getItem('fr_banner_dismissed') === '1') return;
+                banner.hidden = false;
+                document.body.classList.add('fr-has-banner');
+                setOffset();
+            }
+            function hideBanner() {
+                banner.hidden = true;
+                document.body.classList.remove('fr-has-banner');
+                try { sessionStorage.setItem('fr_banner_dismissed', '1'); } catch (e) {}
+                setOffset();
+            }
+            function openModal() {
+                lastFocus = document.activeElement;
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                (closeBtn || modal).focus();
+            }
+            function closeModal() {
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                if (lastFocus && lastFocus.focus) lastFocus.focus();
+            }
+
+            document.querySelectorAll('[data-fr-open]').forEach(function(el) { el.addEventListener('click', openModal); });
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (bannerClose) bannerClose.addEventListener('click', hideBanner);
+            modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+            document.addEventListener('keydown', function(e) {
+                if (!modal.classList.contains('open')) return;
+                if (e.key === 'Escape') { closeModal(); return; }
+                if (e.key === 'Tab') {
+                    var f = modal.querySelectorAll('a[href], button:not([disabled])');
+                    if (!f.length) return;
+                    var first = f[0], last = f[f.length - 1];
+                    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+                }
+            });
+
+            if (copyBtn) copyBtn.addEventListener('click', function() {
+                var num = '01845690704';
+                var done = function() {
+                    copyBtn.classList.add('done');
+                    copyBtn.lastChild.nodeValue = ' Copied';
+                    setTimeout(function() { copyBtn.classList.remove('done'); copyBtn.lastChild.nodeValue = 'Copy'; }, 2000);
+                };
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(num).then(done).catch(function() {
+                        var t = document.createElement('textarea'); t.value = num; document.body.appendChild(t); t.select();
+                        try { document.execCommand('copy'); } catch (_) {} document.body.removeChild(t); done();
+                    });
+                } else { done(); }
+            });
+
+            window.addEventListener('resize', setOffset);
+
+            showBanner();
+            if (!sessionStorage.getItem('fr_popup_seen')) {
+                try { sessionStorage.setItem('fr_popup_seen', '1'); } catch (e) {}
+                setTimeout(openModal, reduce ? 0 : 1200);
             }
         })();
     </script>
