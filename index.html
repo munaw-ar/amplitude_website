@@ -1180,6 +1180,8 @@
         }
         .fr-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: fr-pulse 1.6s ease-in-out infinite; }
         .fr-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; line-height: 1.15; color: #6b0000; margin: 1rem 0 0.5rem; letter-spacing: -0.01em; }
+        .fr-title a { color: inherit; text-decoration: none; }
+        .fr-title a:hover, .fr-title a:focus-visible { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
         .fr-desc { font-size: 0.95rem; color: var(--ink-soft); margin: 0 0 1.1rem; }
         .fr-bkash { background: #faf6f1; border: 1px solid rgba(143,0,0,0.12); border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 1.1rem; }
         .fr-bkash-label { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #c1121f; }
@@ -1228,7 +1230,7 @@
         <div class="fr-banner-inner">
             <span class="fr-banner-dot" aria-hidden="true"></span>
             <a href="/flood-relief" class="fr-banner-text fr-banner-link"><b>Flood Emergency</b> &middot; Chittagong &amp; Bandarban Relief</a>
-            <button class="fr-banner-cta" type="button" data-fr-open>Donate now</button>
+            <button class="fr-banner-cta" type="button" data-fr-open>DONATE NOW</button>
             <button class="fr-banner-close" type="button" id="frBannerClose" aria-label="Dismiss flood relief banner">&times;</button>
         </div>
     </div>
@@ -1240,7 +1242,7 @@
             <button class="fr-close" type="button" id="frClose" aria-label="Close">&times;</button>
             <div class="fr-inner">
                 <span class="fr-badge">Urgent &middot; Flood Relief</span>
-                <h2 class="fr-title" id="frTitle">Flood emergency in Chittagong &amp; Bandarban</h2>
+                <h2 class="fr-title" id="frTitle"><a href="/flood-relief">Flood emergency in Chittagong &amp; Bandarban</a></h2>
                 <p class="fr-desc">Families have lost their homes. Donate via bKash and your support gets emergency food, water, shelter and medical aid there fast.</p>
                 <div class="fr-bkash">
                     <div class="fr-bkash-label">bKash &middot; Send Money</div>

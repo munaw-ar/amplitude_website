@@ -158,6 +158,17 @@
             .connect-card { padding: 2.5rem; text-align: center; }
             .linkedin-btn { justify-content: center; }
         }
+        @media (max-width: 400px) {
+            .connect-card { padding: 1.6rem; }
+            .linkedin-btn { padding: 0.9rem 1.1rem; width: 100%; white-space: normal; }
+            .footer-social { flex-wrap: wrap; gap: 0.6rem 1.2rem; }
+        }
+        /* Galaxy Fold cover screen (<320px): keep the award timeline from overflowing */
+        @media (max-width: 319px) {
+            .award { grid-template-columns: 56px 1fr; gap: 0.8rem; }
+            .award-name { font-size: 1.1rem; }
+            .award-year { font-size: 1.15rem; }
+        }
     </style>
 </head>
 <body>
