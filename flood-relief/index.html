@@ -12,7 +12,11 @@
     <meta property="og:description" content="Families have lost their homes. Your support gets relief there fast. Donate via bKash: 01845690704.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://amplitudebd.com/flood-relief">
-    <!-- SWAP: add og:image once the poster/hero photo exists, e.g. https://amplitudebd.com/images/flood/og.jpg -->
+    <meta property="og:image" content="https://amplitudebd.com/images/flood/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://amplitudebd.com/images/flood/og.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -129,32 +133,17 @@
         .tear::before { left: calc(-1 * clamp(1.6rem, 5vw, 2.6rem) - 11px); }
         .tear::after  { right: calc(-1 * clamp(1.6rem, 5vw, 2.6rem) - 11px); }
 
-        /* ---------------- Grayscale photo placeholders (swap later) ---------------- */
-        .photo-ph {
-            position: relative; overflow: hidden;
-            background:
-                repeating-linear-gradient(45deg, rgba(0,0,0,0.045) 0 2px, transparent 2px 7px),
-                linear-gradient(135deg, #d8d3cd 0%, #b3ada7 55%, #8b857f 100%);
-            filter: grayscale(1) contrast(1.03);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .photo-ph .ph-label {
-            font: 600 0.7rem/1.35 var(--sans); text-transform: uppercase; letter-spacing: 0.14em;
-            color: #4a4640; background: rgba(255,255,255,0.72); border: 1px dashed rgba(0,0,0,0.35);
-            padding: 0.5rem 0.85rem; border-radius: 4px; text-align: center; max-width: 80%;
-        }
+        /* ---------------- Documentary flood photos ---------------- */
+        /* Real imagery (Pexels): illustrative flood scenes, kept in colour for impact. */
 
         /* ---------------- HERO ---------------- */
         .hero { position: relative; padding-top: 64px; }
-        .hero-photo {
-            position: absolute; inset: 0; height: 100%;
-        }
+        .hero-photo { position: absolute; inset: 0; overflow: hidden; background: #201010; }
+        .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; display: block; }
         .hero-photo::after { /* documentary darkening so the cream stub pops */
             content: ""; position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(20,8,8,0.35) 0%, rgba(20,8,8,0.15) 40%, rgba(107,0,0,0.55) 100%);
+            background: linear-gradient(180deg, rgba(20,8,8,0.42) 0%, rgba(20,8,8,0.20) 38%, rgba(107,0,0,0.62) 100%);
         }
-        .hero-photo { align-items: flex-end; justify-content: flex-end; padding: 1.1rem 1.3rem; }
-        .hero-photo .ph-label { position: relative; z-index: 1; max-width: 240px; }
         .hero-inner {
             position: relative; z-index: 2;
             min-height: min(88vh, 720px);
@@ -208,7 +197,12 @@
 
         .happening { background: var(--off-white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
         .happening-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 1.8rem; }
-        .happening-photos .photo-ph { aspect-ratio: 4/3; border-radius: 8px; }
+        .happening-photos figure { margin: 0; }
+        .happening-photos img {
+            width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; display: block;
+            box-shadow: 0 14px 30px -18px rgba(0,0,0,0.5);
+        }
+        .fr-figcap { margin: 0.5rem 0 0; font-size: 0.72rem; line-height: 1.35; color: var(--ink-soft); opacity: 0.72; }
         @media (max-width: 520px) { .happening-photos { grid-template-columns: 1fr; } }
 
         /* Where donations go */
@@ -221,6 +215,28 @@
         .use svg { flex: 0 0 26px; width: 26px; height: 26px; stroke: var(--red); fill: none; stroke-width: 1.9; }
         .use-t { font-weight: 700; color: var(--maroon); font-size: 1.02rem; }
         .use-d { font-size: 0.9rem; color: var(--ink-soft); }
+
+        /* Track record / impact — styled like a receipt to echo the ticket-stub motif */
+        .track { background: var(--off-white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .impact-ticket { --paper: #fbf4ec; color: var(--ink); max-width: 480px; margin-top: 1.6rem; box-shadow: 0 26px 60px -30px rgba(0,0,0,0.5); }
+        .impact-cap { font: 700 0.7rem/1.2 var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin: 0 0 1.1rem; }
+        .impact-list { list-style: none; margin: 0; padding: 0; }
+        .impact-list li { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.62rem 0; border-bottom: 1px dashed rgba(107,0,0,0.18); }
+        .impact-list li:first-child { padding-top: 0; }
+        .impact-label { color: var(--ink-soft); font-weight: 600; font-size: 0.98rem; }
+        .impact-val {
+            margin-left: auto; font-family: var(--display); font-weight: 400; color: var(--red);
+            font-size: clamp(1.2rem, 5vw, 1.5rem); line-height: 1; letter-spacing: 0.01em;
+            font-variant-numeric: tabular-nums; white-space: nowrap;
+        }
+        .impact-total { display: flex; align-items: baseline; gap: 0.6rem; padding-top: 0.35rem; }
+        .impact-total .impact-label { color: var(--maroon); font-size: 1.05rem; font-weight: 700; }
+        .impact-total-val {
+            margin-left: auto; font-family: var(--display); color: var(--maroon);
+            font-size: clamp(1.7rem, 7vw, 2.3rem); line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap;
+        }
+        .track-cta { margin-top: 1.7rem; font-size: 1.05rem; font-weight: 600; color: var(--maroon); }
+        .track-cta a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
 
         /* Donate block */
         .donate { background: linear-gradient(180deg, var(--maroon), #4d0000); color: var(--white); }
@@ -317,11 +333,11 @@
 
     <!-- ===== HERO ===== -->
     <header class="hero">
-        <!-- SWAP: replace this .photo-ph div with a real grayscale hero photo:
-             <img class="hero-photo" src="/images/flood/hero.jpg" alt="Amplitude volunteers delivering flood relief in Chittagong">
-             (keep filter grayscale on it, or upload an already-desaturated shot) -->
-        <div class="hero-photo photo-ph">
-            <span class="ph-label">Hero photo — grayscale relief volunteers on the ground<br>(rain, ponchos, on-ground work)</span>
+        <div class="hero-photo">
+            <picture>
+                <source type="image/webp" srcset="/images/flood/hero.webp">
+                <img src="/images/flood/hero.jpg" alt="Residents wading through deep floodwater toward homes submerged nearly to the rooftops" width="1600" height="1066" fetchpriority="high" decoding="async">
+            </picture>
         </div>
         <div class="wrap hero-inner">
             <div class="stub hero-stub reveal">
@@ -348,9 +364,20 @@
             <p class="lead reveal">Days of relentless rain have flooded villages across Chittagong and Bandarban, submerging homes and cutting off entire hillside communities. Families are stranded without clean water, food, or dry shelter.</p>
             <p class="lead reveal">Amplitude volunteers are on the ground coordinating with local networks to move emergency supplies to the worst-hit areas — but the need is growing faster than we can meet it alone.</p>
             <div class="happening-photos reveal">
-                <!-- SWAP: replace each .photo-ph with <img src="/images/flood/relief-1.jpg" alt="..."> -->
-                <div class="photo-ph"><span class="ph-label">Relief photo 1</span></div>
-                <div class="photo-ph"><span class="ph-label">Relief photo 2</span></div>
+                <figure>
+                    <picture>
+                        <source type="image/webp" srcset="/images/flood/relief-1.webp">
+                        <img src="/images/flood/relief-1.jpg" alt="Children wade through chest-deep floodwater carrying a cooking pot across submerged fields" width="1000" height="666" loading="lazy" decoding="async">
+                    </picture>
+                    <figcaption class="fr-figcap">Families cross rising water to salvage food and belongings.</figcaption>
+                </figure>
+                <figure>
+                    <picture>
+                        <source type="image/webp" srcset="/images/flood/relief-2.webp">
+                        <img src="/images/flood/relief-2.jpg" alt="A young girl crouches in the doorway of her home as floodwater reaches the threshold" width="1000" height="666" loading="lazy" decoding="async">
+                    </picture>
+                    <figcaption class="fr-figcap">For many, the water has already reached the doorstep.</figcaption>
+                </figure>
             </div>
         </div>
     </section>
@@ -381,6 +408,30 @@
         </div>
     </section>
 
+    <!-- ===== 3b. TRACK RECORD / IMPACT ===== -->
+    <section class="track">
+        <div class="wrap">
+            <p class="eyebrow reveal">Our track record</p>
+            <h2 class="sec-h reveal">We've stood with flood victims before</h2>
+            <p class="lead reveal">When Feni and Khagrachari flooded in August 2024, our community answered the call. Here's what that support delivered on the ground.</p>
+            <div class="stub impact-ticket reveal">
+                <p class="impact-cap">Feni &amp; Khagrachari floods &middot; Aug 2024</p>
+                <ul class="impact-list">
+                    <li><span class="impact-label">Raised for Feni relief</span><span class="impact-val">Tk&nbsp;87,770+</span></li>
+                    <li><span class="impact-label">Raised for Khagrachari relief</span><span class="impact-val">Tk&nbsp;110,284+</span></li>
+                    <li><span class="impact-label">Hygiene kits distributed</span><span class="impact-val">2,500</span></li>
+                    <li><span class="impact-label">Clothing cartons delivered</span><span class="impact-val">1,500+</span></li>
+                </ul>
+                <div class="tear"></div>
+                <div class="impact-total">
+                    <span class="impact-label">Lives touched since 2019</span>
+                    <span class="impact-total-val">100,000+</span>
+                </div>
+            </div>
+            <p class="track-cta reveal">Chittagong &amp; Bandarban need that same support now. <a href="#donate">Donate below &darr;</a></p>
+        </div>
+    </section>
+
     <!-- ===== 4. DONATE NOW ===== -->
     <section class="donate" id="donate">
         <div class="wrap">
@@ -400,9 +451,11 @@
                 </div>
                 <div class="tear"></div>
                 <ol class="send-steps">
-                    <li>Open <b>bKash</b> &rarr; tap <b>Send Money</b></li>
+                    <li>Open the <b>bKash</b> app</li>
+                    <li>Tap <b>Send Money</b></li>
                     <li>Enter <b>01845690704</b></li>
-                    <li>Enter the amount &rarr; confirm with your PIN</li>
+                    <li>Enter the amount</li>
+                    <li>Confirm with your <b>PIN</b></li>
                 </ol>
                 <p aria-live="polite" id="copyStatus" style="min-height:1.1em;font-size:0.82rem;color:#0a7d2c;font-weight:600;margin:0.7rem 0 0;"></p>
             </div>
